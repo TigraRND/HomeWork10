@@ -10,6 +10,7 @@ public class CreateUserRequest {
 
     @JsonProperty("job")
     private String job;
+
     @JsonProperty("name")
     private String name;
 

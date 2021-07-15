@@ -7,6 +7,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import ru.otus.APIHelpers.pojo.CreateUserRequest;
 import ru.otus.APIHelpers.pojo.CreateUserResponse;
+import ru.otus.APIHelpers.pojo.ListUsersResponse;
 import ru.otus.APIHelpers.pojo.User;
 
 public interface APIInterface {
@@ -23,5 +24,5 @@ public interface APIInterface {
     Call<CreateUserResponse> createUser(@Body CreateUserRequest body);
 
     @GET("users?page=2")
-    Call <User> listUsers();
+    Call <ListUsersResponse> listUsers();
 }

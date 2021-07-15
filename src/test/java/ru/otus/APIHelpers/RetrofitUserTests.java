@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
 import ru.otus.APIHelpers.pojo.CreateUserRequest;
 import ru.otus.APIHelpers.pojo.CreateUserResponse;
+import ru.otus.APIHelpers.pojo.ListUsersResponse;
 import ru.otus.APIHelpers.pojo.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,10 +58,9 @@ class RetrofitUserTests {
 		responseCreateUser = service.createUser(getRequestBody()).execute();
 
 		userResponse = responseCreateUser.body();
-		System.out.println(userResponse.getId());
-		System.out.println(userResponse.getCreatedAt());
-
-		System.out.println(getRequestBody());
+		log.info("ID созданного пользователя: " + userResponse.getId());
+		log.info("Время создания пользователя: " + userResponse.getCreatedAt());
+		log.info("Body ответа от API : " + getRequestBody());
 
 		if(responseCreateUser.isSuccessful()){
 			System.out.println("Response SUCCESS");
@@ -74,9 +74,18 @@ class RetrofitUserTests {
 	@Test
 	@DisplayName("GET - LIST USERS")
 	void checkUsersList() throws IOException {
-		response = service.listUsers().execute();
-		Assertions.assertEquals(201,response.code());
-		logging();
+		Response<ListUsersResponse> responseListUsers;
+		ListUsersResponse listUsersResponse;
+
+		responseListUsers = service.listUsers().execute();
+		listUsersResponse = responseListUsers.body();
+
+		log.info("Размер списка data: " + listUsersResponse.getData().size());
+		log.info("Всего записей: " + listUsersResponse.getTotal());
+		log.info("Всего страниц: " + listUsersResponse.getTotalPages());
+
+		Assertions.assertEquals(200,responseListUsers.code());
+		Assertions.assertEquals(listUsersResponse.getPerPage(),listUsersResponse.getData().size());
 	}
 
 	void logging(){
