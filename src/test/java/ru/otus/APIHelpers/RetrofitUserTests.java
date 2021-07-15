@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
+import ru.otus.APIHelpers.pojo.CreateUserRequest;
+import ru.otus.APIHelpers.pojo.CreateUserResponse;
 import ru.otus.APIHelpers.pojo.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,14 +51,24 @@ class RetrofitUserTests {
 	@Test
 	@DisplayName("POST - CREATE USER")
 	void checkUserCreation() throws IOException {
-//		TODO передать в метод User DTO
-		String body = "{\n" +
-				"    \"name\": \"morpheus\",\n" +
-				"    \"job\": \"leader\"\n" +
-				"}";
-		response = service.createUser(body).execute();
-		Assertions.assertEquals(201,response.code());
-		logging();
+		Response<CreateUserResponse> responseCreateUser;
+		CreateUserResponse userResponse;
+
+		responseCreateUser = service.createUser(getRequestBody()).execute();
+
+		userResponse = responseCreateUser.body();
+		System.out.println(userResponse.getId());
+		System.out.println(userResponse.getCreatedAt());
+
+		System.out.println(getRequestBody());
+
+		if(responseCreateUser.isSuccessful()){
+			System.out.println("Response SUCCESS");
+		}else{
+			log.info("Response ERROR");
+		}
+		System.out.println(responseCreateUser.body());
+		Assertions.assertEquals(201, responseCreateUser.code());
 	}
 
 	@Test
@@ -69,5 +81,13 @@ class RetrofitUserTests {
 
 	void logging(){
 		log.info("\nResponse code: " + response.code() + "\nBody: " + response.body());
+	}
+
+	public CreateUserRequest getRequestBody() {
+		CreateUserRequest requestNewUserData = new CreateUserRequest();
+		requestNewUserData.setJob("morpheus");
+		requestNewUserData.setName("leader");
+
+		return requestNewUserData;
 	}
 }
