@@ -77,7 +77,7 @@ class RetrofitUserTests {
 		Response<ListUsersResponse> responseListUsers;
 		ListUsersResponse listUsersResponse;
 
-		responseListUsers = service.listUsers().execute();
+		responseListUsers = service.listUsers(2).execute();
 		listUsersResponse = responseListUsers.body();
 
 		log.info("Размер списка data: " + listUsersResponse.getData().size());
