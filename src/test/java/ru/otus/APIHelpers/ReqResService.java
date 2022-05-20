@@ -20,6 +20,6 @@ public interface ReqResService {
     @POST("users")
     Call<CreateUserResponse> createUser(@Body CreateUserRequest body);
 
-    @GET("users?page={pageNum}")
-    Call <ListUsersResponse> listUsers(@Path("pageNum") int pageNum);
+    @GET("users")
+    Call <ListUsersResponse> listUsers(@Query("page") int pageNum);
 }
