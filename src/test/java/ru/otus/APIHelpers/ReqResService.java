@@ -7,7 +7,7 @@ import ru.otus.APIHelpers.pojo.CreateUserResponse;
 import ru.otus.APIHelpers.pojo.ListUsersResponse;
 import ru.otus.APIHelpers.pojo.User;
 
-public interface APIInterface {
+public interface ReqResService {
     @GET("users/2")
     Call <User> getUserById();
 

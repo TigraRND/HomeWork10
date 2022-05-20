@@ -15,11 +15,11 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 
 @SpringBootTest
-class RetrofitUserTests {
-	private Logger log = LogManager.getLogger(RetrofitUserTests.class);
+class RetrofitTests {
+	private Logger log = LogManager.getLogger(RetrofitTests.class);
 	Response<User> response;
 	//Endpoint service for send request
-	APIInterface service = APIClientHelper.getClient().create(APIInterface.class);
+	ReqResService service = ReqResManager.getClient().create(ReqResService.class);
 
 	@Test
 	@DisplayName("GET - SINGLE USER")
@@ -80,7 +80,7 @@ class RetrofitUserTests {
 		responseListUsers = service.listUsers(2).execute();
 		listUsersResponse = responseListUsers.body();
 
-		log.info("Размер списка data: " + listUsersResponse.getData().size());
+//		log.info("Размер списка data: " + listUsersResponse.getData().size());
 		log.info("Всего записей: " + listUsersResponse.getTotal());
 		log.info("Всего страниц: " + listUsersResponse.getTotalPages());
 
