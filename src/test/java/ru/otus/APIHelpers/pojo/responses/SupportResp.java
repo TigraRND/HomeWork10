@@ -1,30 +1,18 @@
-package ru.otus.APIHelpers.pojo;
+package ru.otus.APIHelpers.pojo.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.ToString;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Support {
+@Getter
+@ToString
+public class SupportResp {
     @JsonProperty("url")
     private String url;
     @JsonProperty("text")
     private String text;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    @Override
-    public String toString() {
-        return "Support{" +
-                "url='" + url + '\'' +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }

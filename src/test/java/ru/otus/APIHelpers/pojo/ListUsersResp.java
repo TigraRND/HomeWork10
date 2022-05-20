@@ -1,10 +1,12 @@
 package ru.otus.APIHelpers.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import ru.otus.APIHelpers.pojo.responses.SupportResp;
+import ru.otus.APIHelpers.pojo.responses.UserDataResp;
 
 import java.util.List;
 
-public class ListUsersResponse {
+public class ListUsersResp {
     @JsonProperty("page")
     private int page;
 
@@ -18,10 +20,10 @@ public class ListUsersResponse {
     private int totalPages;
 
     @JsonProperty("data")
-    private List<Data> data;
+    private List<UserDataResp> data;
 
     @JsonProperty("support")
-    private Support support;
+    private SupportResp support;
 
     public int getPage() {
         return page;
@@ -39,11 +41,11 @@ public class ListUsersResponse {
         return totalPages;
     }
 
-    public List<Data> getData() {
+    public List<UserDataResp> getData() {
         return data;
     }
 
-    public Support getSupport() {
+    public SupportResp getSupport() {
         return support;
     }
 

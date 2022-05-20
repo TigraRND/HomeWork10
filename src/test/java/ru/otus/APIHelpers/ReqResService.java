@@ -2,24 +2,24 @@ package ru.otus.APIHelpers;
 
 import retrofit2.Call;
 import retrofit2.http.*;
-import ru.otus.APIHelpers.pojo.CreateUserRequest;
-import ru.otus.APIHelpers.pojo.CreateUserResponse;
-import ru.otus.APIHelpers.pojo.ListUsersResponse;
-import ru.otus.APIHelpers.pojo.User;
+import ru.otus.APIHelpers.pojo.requests.CreateUserReq;
+import ru.otus.APIHelpers.pojo.responses.CreateUserResp;
+import ru.otus.APIHelpers.pojo.ListUsersResp;
+import ru.otus.APIHelpers.pojo.responses.SingleUserResp;
 
 public interface ReqResService {
     @GET("users/2")
-    Call <User> getUserById();
+    Call <SingleUserResp> getUserById();
 
     @GET("users/23")
-    Call <User> userNotFound();
+    Call <SingleUserResp> userNotFound();
 
     @DELETE("users/2")
-    Call<User> deleteUser();
+    Call<SingleUserResp> deleteUser();
 
     @POST("users")
-    Call<CreateUserResponse> createUser(@Body CreateUserRequest body);
+    Call<CreateUserResp> createUser(@Body CreateUserReq body);
 
     @GET("users")
-    Call <ListUsersResponse> listUsers(@Query("page") int pageNum);
+    Call <ListUsersResp> listUsers(@Query("page") int pageNum);
 }
