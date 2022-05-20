@@ -1,10 +1,10 @@
-package ru.otus.APIHelpers;
+package ru.otus.APIHelpers.services;
 
 import retrofit2.Call;
 import retrofit2.http.*;
 import ru.otus.APIHelpers.pojo.requests.CreateUserReq;
 import ru.otus.APIHelpers.pojo.responses.CreateUserResp;
-import ru.otus.APIHelpers.pojo.ListUsersResp;
+import ru.otus.APIHelpers.pojo.responses.ListUsersResp;
 import ru.otus.APIHelpers.pojo.responses.SingleUserResp;
 
 public interface ReqResService {

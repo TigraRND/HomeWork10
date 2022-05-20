@@ -18,5 +18,33 @@ public class SingleUserResp {
     @JsonProperty("support")
     private SupportResp support;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @ToString
+    public static class UserDataResp {
+        @JsonProperty("id")
+        private int id;
+        @JsonProperty("email")
+        private String email;
+        @JsonProperty("first_name")
+        private String firstName;
+        @JsonProperty("last_name")
+        private String lastName;
+        @JsonProperty("avatar")
+        private String avatar;
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @ToString
+    public static class SupportResp {
+        @JsonProperty("url")
+        private String url;
+        @JsonProperty("text")
+        private String text;
+    }
+
     //FIXME добавить UserDateResp и SupportResp внутренними классами
 }

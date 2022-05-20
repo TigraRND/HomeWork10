@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static io.restassured.RestAssured.given;
 
 @SpringBootTest
-class ApiHelpersApplicationTestsRA {
+class RestAssuredTests {
 
 	@Test
 	void restAssuredTest() {

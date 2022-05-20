@@ -1,4 +1,4 @@
-package ru.otus.APIHelpers;
+package ru.otus.APIHelpers.managers;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;

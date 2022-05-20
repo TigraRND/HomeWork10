@@ -5,12 +5,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
+import ru.otus.APIHelpers.managers.ReqResManager;
 import ru.otus.APIHelpers.pojo.requests.CreateUserReq;
 import ru.otus.APIHelpers.pojo.responses.CreateUserResp;
-import ru.otus.APIHelpers.pojo.ListUsersResp;
+import ru.otus.APIHelpers.pojo.responses.ListUsersResp;
 import ru.otus.APIHelpers.pojo.responses.SingleUserResp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.otus.APIHelpers.services.ReqResService;
 
 import java.io.IOException;
 
