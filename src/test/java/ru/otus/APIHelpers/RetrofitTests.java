@@ -2,35 +2,31 @@ package ru.otus.APIHelpers;
 
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
-import ru.otus.APIHelpers.managers.ReqResManager;
+import ru.otus.APIHelpers.apihelpers.ReqResManager;
 import ru.otus.APIHelpers.dto.requests.CreateUserReq;
 import ru.otus.APIHelpers.dto.responses.CreateUserResp;
 import ru.otus.APIHelpers.dto.responses.ListUsersResp;
 import ru.otus.APIHelpers.dto.responses.SingleUserResp;
-import ru.otus.APIHelpers.services.ReqResService;
 
 import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 @SpringBootTest
 class RetrofitTests {
+	ReqResManager reqResManager = new ReqResManager();
 	Response<SingleUserResp> response;
-	//Endpoint service for send request
-	ReqResService service = ReqResManager.getClient().create(ReqResService.class);
 
 	@Order(1)
 	@Test
 	@DisplayName("GET LIST USERS - success")
-	@SneakyThrows
 	void checkUsersList() {
 		int pageNum = 1;
-		Response<ListUsersResp> listUsersRespBody = service.listUsers(pageNum).execute();
-		ListUsersResp listUsersDTO = listUsersRespBody.body();
+		ListUsersResp listUsersDTO = reqResManager.getUserList(pageNum);
 
 		log.info("Количество пользователей на текущей странице: " + listUsersDTO.getData().size());
 		log.info("Всего записей: " + listUsersDTO.getTotal());
@@ -49,10 +45,7 @@ class RetrofitTests {
 	@SneakyThrows
 	void checkEmptyUserList() {
 		int pageNum = 4;
-		ListUsersResp listUsersDTO = service
-				.listUsers(pageNum)
-				.execute()
-				.body();
+		ListUsersResp listUsersDTO = reqResManager.getUserList(pageNum);
 
 		assertAll(
 				() -> assertEquals(pageNum, listUsersDTO.getPage()),
@@ -63,42 +56,45 @@ class RetrofitTests {
 
 	@Order(3)
 	@Test
-	@Disabled("Переписать после рефакторинга классов сервиса и менеджера")
 	@DisplayName("GET SINGLE USER - success")
-	@SneakyThrows
 	void checkGettingSingleUser() {
-		SingleUserResp singleUserDTO = service.getUserById(10).execute().body();
+		int userId = 10;
+		SingleUserResp singleUserDTO = reqResManager.getUserById(userId);
 
-		if(response.isSuccessful()){
-			logging();
-		}else{
-			log.info("Response ERROR");
-		}
+		assertAll(
+				() -> assertEquals(userId, singleUserDTO.getData().getId()),
+				() -> assertEquals("byron.fields@reqres.in", singleUserDTO.getData().getEmail()),
+				() -> assertEquals("Byron", singleUserDTO.getData().getFirstName()),
+				() -> assertEquals("Fields", singleUserDTO.getData().getLastName()),
+				() -> assertEquals("https://reqres.in/img/faces/" + userId + "-image.jpg", singleUserDTO.getData().getAvatar())
+		);
+	}
+
+	@Order(4)
+	@Test
+	@DisplayName("GET SINGLE USER - not found")
+	void checkSingleUserNotFound() {
+		int userId = 14;
+		SingleUserResp singleUserDTO = reqResManager.getUserById(userId);
+		assertNull(singleUserDTO);
 	}
 
 	@Test
-	@DisplayName("GET - SINGLE USER NOT FOUND")
-	void checkSingleUserNotFound() throws IOException {
-		response = service.getUserById(15).execute();
-		Assertions.assertEquals(404,response.code());
-		logging();
-	}
-
-	@Test
+	@Disabled
 	@DisplayName("DELETE - DELETE USER")
 	void checkUserDeleting() throws IOException {
-		response = service.deleteUser().execute();
-		Assertions.assertEquals(204,response.code());
-		logging();
+		response = reqResManager.service.deleteUser().execute();
+		Assertions.assertEquals(204, response.code());
 	}
 
 	@Test
+	@Disabled
 	@DisplayName("POST - CREATE USER")
 	void checkUserCreation() throws IOException {
 		Response<CreateUserResp> responseCreateUser;
 		CreateUserResp userResponse;
 
-		responseCreateUser = service.createUser(getRequestBody()).execute();
+		responseCreateUser = reqResManager.service.createUser(getRequestBody()).execute();
 
 		userResponse = responseCreateUser.body();
 		log.info("ID созданного пользователя: " + userResponse.getId());

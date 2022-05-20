@@ -9,7 +9,7 @@ import ru.otus.APIHelpers.dto.responses.SingleUserResp;
 
 public interface ReqResService {
     @GET("users")
-    Call <ListUsersResp> listUsers(@Query("page") int pageNum);
+    Call <ListUsersResp> getUserList(@Query("page") int pageNum);
 
     @GET("users/{id}")
     Call <SingleUserResp> getUserById(@Path("id") int id);
