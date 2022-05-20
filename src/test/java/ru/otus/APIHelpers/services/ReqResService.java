@@ -12,10 +12,10 @@ public interface ReqResService {
     Call <ListUsersResp> getUserList(@Query("page") int pageNum);
 
     @GET("users/{id}")
-    Call <SingleUserResp> getUserById(@Path("id") int id);
+    Call <SingleUserResp> getUser(@Path("id") int id);
 
-    @DELETE("users/2")
-    Call<SingleUserResp> deleteUser();
+    @DELETE("users/{id}")
+    Call<Void> deleteUser(@Path("id") int id);
 
     @POST("users")
     Call<CreateUserResp> createUser(@Body CreateUserReq body);

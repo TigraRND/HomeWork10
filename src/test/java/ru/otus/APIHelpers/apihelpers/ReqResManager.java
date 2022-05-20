@@ -4,6 +4,8 @@ import lombok.SneakyThrows;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
+import ru.otus.APIHelpers.dto.requests.CreateUserReq;
+import ru.otus.APIHelpers.dto.responses.CreateUserResp;
 import ru.otus.APIHelpers.dto.responses.ListUsersResp;
 import ru.otus.APIHelpers.dto.responses.SingleUserResp;
 import ru.otus.APIHelpers.services.ReqResService;
@@ -28,9 +30,23 @@ public class ReqResManager {
     }
 
     @SneakyThrows
-    public Response<SingleUserResp> getUserById(int userId) {
+    public Response<SingleUserResp> getUser(int userId) {
         return service
-                .getUserById(userId)
+                .getUser(userId)
+                .execute();
+    }
+
+    @SneakyThrows
+    public Response<Void> deleteUser(int useId) {
+        return service
+                .deleteUser(useId)
+                .execute();
+    }
+
+    @SneakyThrows
+    public Response<CreateUserResp> createUser(CreateUserReq reqBody) {
+        return service
+                .createUser(reqBody)
                 .execute();
     }
 
