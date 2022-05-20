@@ -2,10 +2,10 @@ package ru.otus.APIHelpers.services;
 
 import retrofit2.Call;
 import retrofit2.http.*;
-import ru.otus.APIHelpers.pojo.requests.CreateUserReq;
-import ru.otus.APIHelpers.pojo.responses.CreateUserResp;
-import ru.otus.APIHelpers.pojo.responses.ListUsersResp;
-import ru.otus.APIHelpers.pojo.responses.SingleUserResp;
+import ru.otus.APIHelpers.dto.requests.CreateUserReq;
+import ru.otus.APIHelpers.dto.responses.CreateUserResp;
+import ru.otus.APIHelpers.dto.responses.ListUsersResp;
+import ru.otus.APIHelpers.dto.responses.SingleUserResp;
 
 public interface ReqResService {
     @GET("users/2")

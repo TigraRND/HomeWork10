@@ -1,4 +1,4 @@
-package ru.otus.APIHelpers.pojo.responses;
+package ru.otus.APIHelpers.dto.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
