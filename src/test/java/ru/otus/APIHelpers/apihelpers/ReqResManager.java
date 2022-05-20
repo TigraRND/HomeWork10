@@ -21,19 +21,17 @@ public class ReqResManager {
     }
 
     @SneakyThrows
-    public ListUsersResp getUserList(int pageNum) {
+    public Response<ListUsersResp> getUserList(int pageNum) {
         return service
                 .getUserList(pageNum)
-                .execute()
-                .body();
+                .execute();
     }
 
     @SneakyThrows
-    public SingleUserResp getUserById(int userId) {
+    public Response<SingleUserResp> getUserById(int userId) {
         return service
                 .getUserById(userId)
-                .execute()
-                .body();
+                .execute();
     }
 
 }
