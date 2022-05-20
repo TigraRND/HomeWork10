@@ -8,18 +8,15 @@ import ru.otus.APIHelpers.dto.responses.ListUsersResp;
 import ru.otus.APIHelpers.dto.responses.SingleUserResp;
 
 public interface ReqResService {
-    @GET("users/2")
-    Call <SingleUserResp> getUserById();
+    @GET("users")
+    Call <ListUsersResp> listUsers(@Query("page") int pageNum);
 
-    @GET("users/23")
-    Call <SingleUserResp> userNotFound();
+    @GET("users/{id}")
+    Call <SingleUserResp> getUserById(@Path("id") int id);
 
     @DELETE("users/2")
     Call<SingleUserResp> deleteUser();
 
     @POST("users")
     Call<CreateUserResp> createUser(@Body CreateUserReq body);
-
-    @GET("users")
-    Call <ListUsersResp> listUsers(@Query("page") int pageNum);
 }
