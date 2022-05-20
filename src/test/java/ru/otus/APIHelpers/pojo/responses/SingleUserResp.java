@@ -45,6 +45,4 @@ public class SingleUserResp {
         @JsonProperty("text")
         private String text;
     }
-
-    //FIXME добавить UserDateResp и SupportResp внутренними классами
 }
