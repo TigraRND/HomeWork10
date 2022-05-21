@@ -49,16 +49,16 @@ public class ReqResManager {
     }
 
     @SneakyThrows
-    public Response<Void> deleteUser(int useId) {
+    public Response<CreateUserResp> createUser(CreateUserReq reqBody) {
         return service
-                .deleteUser(useId)
+                .createUser(reqBody)
                 .execute();
     }
 
     @SneakyThrows
-    public Response<CreateUserResp> createUser(CreateUserReq reqBody) {
+    public Response<Void> deleteUser(int useId) {
         return service
-                .createUser(reqBody)
+                .deleteUser(useId)
                 .execute();
     }
 

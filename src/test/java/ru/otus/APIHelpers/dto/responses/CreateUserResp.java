@@ -11,10 +11,14 @@ import lombok.ToString;
 @Getter
 @ToString
 public class CreateUserResp {
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("first_name")
+    private String firstName;
+    @JsonProperty("last_name")
+    private String lastName;
     @JsonProperty("job")
     private String job;
+    @JsonProperty("email")
+    private String email;
     @JsonProperty("id")
     private String id;
     @JsonProperty("createdAt")

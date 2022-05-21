@@ -18,9 +18,9 @@ public interface ReqResService {
     @GET("unknown/{id}")
     Call<SingleResourceResp> getResource(@Path("id") int id);
 
-    @DELETE("users/{id}")
-    Call<Void> deleteUser(@Path("id") int id);
-
     @POST("users")
     Call<CreateUserResp> createUser(@Body CreateUserReq body);
+
+    @DELETE("users/{id}")
+    Call<Void> deleteUser(@Path("id") int id);
 }

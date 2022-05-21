@@ -149,22 +149,31 @@ class RetrofitTests {
     }
 
     @Test
-    @DisplayName("POST - CREATE USER")
-    void checkUserCreation() throws IOException {
-        String userName = "Ronald";
+    @DisplayName("POST CREATE USER - success")
+    void checkUserCreation() {
+        String userFirstName = "Ronald";
+        String userLastName = "MacDonald";
         String userJob = "Clown";
+        String userEmail = "ronald@macdonald.com";
 
         Response<CreateUserResp> resp = reqResManager
-                .createUser(new CreateUserReq(userName, userJob));
+                .createUser(new CreateUserReq(
+                        userFirstName,
+                        userLastName,
+                        userJob,
+                        userEmail
+                ));
         CreateUserResp createUserDTO = resp.body();
 
-        log.info("Body ответа от API : \n" + createUserDTO);
+        log.info(createUserDTO);
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_CREATED, resp.code()),
-                () -> assertEquals(userName, createUserDTO.getName()),
+                () -> assertEquals(userFirstName, createUserDTO.getFirstName()),
+                () -> assertEquals(userLastName, createUserDTO.getLastName()),
                 () -> assertEquals(userJob, createUserDTO.getJob()),
-                () -> assertFalse(createUserDTO.getJob().isBlank()),
+                () -> assertEquals(userEmail, createUserDTO.getEmail()),
+                () -> assertFalse(createUserDTO.getId().isBlank()),
                 () -> assertFalse(createUserDTO.getCreatedAt().isBlank())
         );
     }
