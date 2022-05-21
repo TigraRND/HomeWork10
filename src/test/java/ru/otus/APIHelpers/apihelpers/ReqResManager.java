@@ -1,6 +1,9 @@
 package ru.otus.APIHelpers.apihelpers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import lombok.extern.log4j.Log4j2;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -8,6 +11,10 @@ import ru.otus.APIHelpers.dto.requests.CreateUserReq;
 import ru.otus.APIHelpers.dto.responses.*;
 import ru.otus.APIHelpers.services.ReqResService;
 
+import java.io.File;
+import java.io.IOException;
+
+@Log4j2
 public class ReqResManager {
     private static final String BASE_URL = "https:/reqres.in/api/";
     public final ReqResService service;
@@ -18,6 +25,16 @@ public class ReqResManager {
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build()
                 .create(ReqResService.class);
+    }
+
+    public static SupportResp jsonFileToDTO(String fileName) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.readValue(new File("src/test/resources/jsonExamples/" + fileName), SupportResp.class);
+        } catch (IOException exception) {
+            log.error("Не найден файл: {}", fileName);
+            return null;
+        }
     }
 
     @SneakyThrows

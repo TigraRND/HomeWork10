@@ -1,5 +1,6 @@
 package ru.otus.APIHelpers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,8 @@ import retrofit2.Response;
 import ru.otus.APIHelpers.apihelpers.ReqResManager;
 import ru.otus.APIHelpers.dto.requests.CreateUserReq;
 import ru.otus.APIHelpers.dto.responses.*;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -157,23 +160,20 @@ class RetrofitTests {
     void checkSupportObject() {
         int pageNum = 1;
         int objectId = 4;
-        String expectedURL = "https://reqres.in/#support-heading";
-        String expectedText = "To keep ReqRes free, contributions towards server costs are appreciated!";
+        SupportResp expectedDTO = ReqResManager.jsonFileToDTO("SupportDTO.json");
 
         ListUsersResp listUsersDTO = reqResManager.getUserList(pageNum).body();
         SingleUserResp singleUserDTO = reqResManager.getUser(objectId).body();
         ListResourceResp listResourceDTO = reqResManager.getResourceList(pageNum).body();
         SingleResourceResp singleResourceResp = reqResManager.getResource(objectId).body();
 
+        assertEquals(expectedDTO,listUsersDTO.getSupport());
+
         assertAll(
-                () -> assertEquals(expectedURL, listUsersDTO.getSupport().getUrl()),
-                () -> assertEquals(expectedText, listUsersDTO.getSupport().getText()),
-                () -> assertEquals(expectedURL, singleUserDTO.getSupport().getUrl()),
-                () -> assertEquals(expectedText, singleUserDTO.getSupport().getText()),
-                () -> assertEquals(expectedURL, listResourceDTO.getSupport().getUrl()),
-                () -> assertEquals(expectedText, listResourceDTO.getSupport().getText()),
-                () -> assertEquals(expectedURL, singleResourceResp.getSupport().getUrl()),
-                () -> assertEquals(expectedText, singleResourceResp.getSupport().getText())
+                () -> assertEquals(expectedDTO,listUsersDTO.getSupport()),
+                () -> assertEquals(expectedDTO,singleUserDTO.getSupport()),
+                () -> assertEquals(expectedDTO,listResourceDTO.getSupport()),
+                () -> assertEquals(expectedDTO,singleResourceResp.getSupport())
         );
     }
 
