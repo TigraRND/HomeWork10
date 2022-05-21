@@ -1,17 +1,14 @@
-package ru.otus.APIHelpers;
+package ru.otus.APIHelpers.tests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
-import ru.otus.APIHelpers.apihelpers.ReqResManager;
 import ru.otus.APIHelpers.dto.requests.CreateUserReq;
 import ru.otus.APIHelpers.dto.responses.*;
-
-import java.io.IOException;
+import ru.otus.APIHelpers.managers.ReqResManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 

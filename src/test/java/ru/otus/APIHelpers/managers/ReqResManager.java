@@ -1,6 +1,5 @@
-package ru.otus.APIHelpers.apihelpers;
+package ru.otus.APIHelpers.managers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;

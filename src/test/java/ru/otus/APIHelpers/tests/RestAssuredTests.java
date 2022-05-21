@@ -1,4 +1,4 @@
-package ru.otus.APIHelpers;
+package ru.otus.APIHelpers.tests;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
