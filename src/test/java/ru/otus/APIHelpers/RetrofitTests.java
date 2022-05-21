@@ -8,9 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
 import ru.otus.APIHelpers.apihelpers.ReqResManager;
 import ru.otus.APIHelpers.dto.requests.CreateUserReq;
-import ru.otus.APIHelpers.dto.responses.CreateUserResp;
-import ru.otus.APIHelpers.dto.responses.ListUsersResp;
-import ru.otus.APIHelpers.dto.responses.SingleUserResp;
+import ru.otus.APIHelpers.dto.responses.*;
 
 import java.io.IOException;
 
@@ -31,6 +29,7 @@ class RetrofitTests {
         log.info("Количество пользователей на текущей странице: " + listUsersDTO.getData().size());
         log.info("Всего записей: " + listUsersDTO.getTotal());
         log.info("Всего страниц: " + listUsersDTO.getTotalPages());
+        log.info(resp.body());
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -78,6 +77,7 @@ class RetrofitTests {
         int userId = 14;
         Response<SingleUserResp> resp = reqResManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
+
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
                 () -> assertNull(singleUserDTO)
@@ -85,11 +85,67 @@ class RetrofitTests {
     }
 
     @Test
-    @DisplayName("DELETE USER - success")
-    void checkUserDeleting() {
-        int userId = 2;
-        Response<Void> resp = reqResManager.deleteUser(userId);
-        assertEquals(HttpStatus.SC_NO_CONTENT, resp.code());
+    @DisplayName("GET LIST RESOURCE - success")
+    void checkResourceList() {
+        int pageNum = 2;
+        Response<ListResourceResp> resp = reqResManager.getResourceList(pageNum);
+        ListResourceResp listResourceDTO = resp.body();
+
+        log.info("Количество ресурсов на текущей странице: " + listResourceDTO.getData().size());
+        log.info("Всего записей: " + listResourceDTO.getTotal());
+        log.info("Всего страниц: " + listResourceDTO.getTotalPages());
+        log.info(resp.body());
+
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(pageNum, listResourceDTO.getPage()),
+                () -> assertEquals(listResourceDTO.getPerPage(), listResourceDTO.getData().size()),
+                () -> assertNotNull(listResourceDTO.getData())
+        );
+    }
+
+    @Test
+    @DisplayName("GET LIST RESOURCE - empty set")
+    void checkEmptyResourceList() {
+        int pageNum = 5;
+        Response<ListResourceResp> resp = reqResManager.getResourceList(pageNum);
+        ListResourceResp listResourceDTO = resp.body();
+
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(pageNum, listResourceDTO.getPage()),
+                () -> assertEquals(0, listResourceDTO.getData().size())
+        );
+    }
+
+    @Test
+    @DisplayName("GET SINGLE RESOURCE - success")
+    void checkGettingSingleResource() {
+        int resourceId = 12;
+        Response<SingleResourceResp> resp = reqResManager.getResource(resourceId);
+        SingleResourceResp singleResourceDTO = resp.body();
+
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(resourceId, singleResourceDTO.getData().getId()),
+                () -> assertEquals("honeysuckle", singleResourceDTO.getData().getName()),
+                () -> assertEquals(2011, singleResourceDTO.getData().getYear()),
+                () -> assertEquals("#D94F70", singleResourceDTO.getData().getColor()),
+                () -> assertEquals("18-2120", singleResourceDTO.getData().getPantoneValue())
+        );
+    }
+
+    @Test
+    @DisplayName("GET SINGLE RESOURCE - not found")
+    void checkSingleResourceNotFound() {
+        int resourceId = 16;
+        Response<SingleResourceResp> resp = reqResManager.getResource(resourceId);
+        SingleResourceResp singleResourceDTO = resp.body();
+
+        assertAll(
+                () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
+                () -> assertNull(singleResourceDTO)
+        );
     }
 
     @Test
@@ -111,5 +167,13 @@ class RetrofitTests {
                 () -> assertFalse(createUserDTO.getJob().isBlank()),
                 () -> assertFalse(createUserDTO.getCreatedAt().isBlank())
         );
+    }
+
+    @Test
+    @DisplayName("DELETE USER - success")
+    void checkUserDeleting() {
+        int userId = 2;
+        Response<Void> resp = reqResManager.deleteUser(userId);
+        assertEquals(HttpStatus.SC_NO_CONTENT, resp.code());
     }
 }
