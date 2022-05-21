@@ -160,7 +160,7 @@ class RetrofitTests {
     void checkSupportObject() {
         int pageNum = 1;
         int objectId = 4;
-        SupportResp expectedDTO = ReqResManager.jsonFileToDTO("SupportDTO.json");
+        SupportResp expectedDTO = ReqResManager.jsonFileToDTO("SupportDTO.json", SupportResp.class);
 
         ListUsersResp listUsersDTO = reqResManager.getUserList(pageNum).body();
         SingleUserResp singleUserDTO = reqResManager.getUser(objectId).body();

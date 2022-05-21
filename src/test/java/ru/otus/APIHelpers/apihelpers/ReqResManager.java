@@ -27,10 +27,10 @@ public class ReqResManager {
                 .create(ReqResService.class);
     }
 
-    public static SupportResp jsonFileToDTO(String fileName) {
+    public static <T> T jsonFileToDTO(String fileName, Class<T> clazz) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(new File("src/test/resources/jsonExamples/" + fileName), SupportResp.class);
+            return mapper.readValue(new File("src/test/resources/jsonExamples/" + fileName), clazz);
         } catch (IOException exception) {
             log.error("Не найден файл: {}", fileName);
             return null;
