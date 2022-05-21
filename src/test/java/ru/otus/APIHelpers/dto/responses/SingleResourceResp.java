@@ -10,26 +10,26 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @ToString
-public class SingleUserResp {
+public class SingleResourceResp {
     @JsonProperty("data")
-    private UserDataResp data;
+    public ResourceDataResponse data;
     @JsonProperty("support")
-    private SupportResp support;
+    public SupportResp support;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonIgnoreProperties(ignoreUnknown = true)
     @Getter
     @ToString
-    public static class UserDataResp {
+    public static class ResourceDataResponse {
         @JsonProperty("id")
-        private int id;
-        @JsonProperty("email")
-        private String email;
-        @JsonProperty("first_name")
-        private String firstName;
-        @JsonProperty("last_name")
-        private String lastName;
-        @JsonProperty("avatar")
-        private String avatar;
+        public int id;
+        @JsonProperty("name")
+        public String name;
+        @JsonProperty("year")
+        public int year;
+        @JsonProperty("color")
+        public String color;
+        @JsonProperty("pantone_value")
+        public String pantoneValue;
     }
 }

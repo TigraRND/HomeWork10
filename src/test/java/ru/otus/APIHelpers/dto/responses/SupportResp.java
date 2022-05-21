@@ -10,13 +10,9 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @ToString
-public class CreateUserResp {
-    @JsonProperty("name")
-    private String name;
-    @JsonProperty("job")
-    private String job;
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("createdAt")
-    private String createdAt;
+public class SupportResp {
+    @JsonProperty("url")
+    private String url;
+    @JsonProperty("text")
+    private String text;
 }

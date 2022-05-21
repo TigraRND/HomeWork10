@@ -14,6 +14,9 @@ public interface ReqResService {
     @GET("users/{id}")
     Call <SingleUserResp> getUser(@Path("id") int id);
 
+    @GET("unknown")
+    Call<Void> getResourceList(@Query("page") int pageNum);
+
     @DELETE("users/{id}")
     Call<Void> deleteUser(@Path("id") int id);
 

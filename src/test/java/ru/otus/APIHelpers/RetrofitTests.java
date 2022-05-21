@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class RetrofitTests {
     ReqResManager reqResManager = new ReqResManager();
-    Response<SingleUserResp> response;
 
     @Test
     @DisplayName("GET LIST USERS - success")

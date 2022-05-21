@@ -12,7 +12,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @ToString
-public class ListUsersResp {
+public class ListResourceResp {
     @JsonProperty("page")
     private int page;
     @JsonProperty("per_page")
@@ -22,7 +22,7 @@ public class ListUsersResp {
     @JsonProperty("total_pages")
     private int totalPages;
     @JsonProperty("data")
-    private List<SingleUserResp.UserDataResp> data;
+    private List<SingleResourceResp.ResourceDataResponse> data;
     @JsonProperty("support")
     private SupportResp support;
 }
