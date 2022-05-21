@@ -10,8 +10,6 @@ import ru.otus.APIHelpers.apihelpers.ReqResManager;
 import ru.otus.APIHelpers.dto.requests.CreateUserReq;
 import ru.otus.APIHelpers.dto.responses.*;
 
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
@@ -35,7 +33,8 @@ class RetrofitTests {
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
                 () -> assertEquals(pageNum, listUsersDTO.getPage()),
                 () -> assertEquals(listUsersDTO.getPerPage(), listUsersDTO.getData().size()),
-                () -> assertNotNull(listUsersDTO.getData())
+                () -> assertNotNull(listUsersDTO.getData().get(0)),
+                () -> assertNotNull(listUsersDTO.getSupport())
         );
     }
 
@@ -49,7 +48,8 @@ class RetrofitTests {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
                 () -> assertEquals(pageNum, listUsersDTO.getPage()),
-                () -> assertEquals(0, listUsersDTO.getData().size())
+                () -> assertEquals(0, listUsersDTO.getData().size()),
+                () -> assertNotNull(listUsersDTO.getSupport())
         );
     }
 
@@ -67,7 +67,8 @@ class RetrofitTests {
                 () -> assertEquals("byron.fields@reqres.in", singleUserDTO.getData().getEmail()),
                 () -> assertEquals("Byron", singleUserDTO.getData().getFirstName()),
                 () -> assertEquals("Fields", singleUserDTO.getData().getLastName()),
-                () -> assertEquals("https://reqres.in/img/faces/" + userId + "-image.jpg", singleUserDTO.getData().getAvatar())
+                () -> assertEquals("https://reqres.in/img/faces/" + userId + "-image.jpg", singleUserDTO.getData().getAvatar()),
+                () -> assertNotNull(singleUserDTO.getSupport())
         );
     }
 
@@ -100,7 +101,8 @@ class RetrofitTests {
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
                 () -> assertEquals(pageNum, listResourceDTO.getPage()),
                 () -> assertEquals(listResourceDTO.getPerPage(), listResourceDTO.getData().size()),
-                () -> assertNotNull(listResourceDTO.getData())
+                () -> assertNotNull(listResourceDTO.getData().get(0)),
+                () -> assertNotNull(listResourceDTO.getSupport())
         );
     }
 
@@ -114,7 +116,8 @@ class RetrofitTests {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
                 () -> assertEquals(pageNum, listResourceDTO.getPage()),
-                () -> assertEquals(0, listResourceDTO.getData().size())
+                () -> assertEquals(0, listResourceDTO.getData().size()),
+                () -> assertNotNull(listResourceDTO.getSupport())
         );
     }
 
@@ -131,7 +134,8 @@ class RetrofitTests {
                 () -> assertEquals("honeysuckle", singleResourceDTO.getData().getName()),
                 () -> assertEquals(2011, singleResourceDTO.getData().getYear()),
                 () -> assertEquals("#D94F70", singleResourceDTO.getData().getColor()),
-                () -> assertEquals("18-2120", singleResourceDTO.getData().getPantoneValue())
+                () -> assertEquals("18-2120", singleResourceDTO.getData().getPantoneValue()),
+                () -> assertNotNull(singleResourceDTO.getSupport())
         );
     }
 
@@ -145,6 +149,31 @@ class RetrofitTests {
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
                 () -> assertNull(singleResourceDTO)
+        );
+    }
+
+    @Test
+    @DisplayName("Проверка блока Support")
+    void checkSupportObject() {
+        int pageNum = 1;
+        int objectId = 4;
+        String expectedURL = "https://reqres.in/#support-heading";
+        String expectedText = "To keep ReqRes free, contributions towards server costs are appreciated!";
+
+        ListUsersResp listUsersDTO = reqResManager.getUserList(pageNum).body();
+        SingleUserResp singleUserDTO = reqResManager.getUser(objectId).body();
+        ListResourceResp listResourceDTO = reqResManager.getResourceList(pageNum).body();
+        SingleResourceResp singleResourceResp = reqResManager.getResource(objectId).body();
+
+        assertAll(
+                () -> assertEquals(expectedURL, listUsersDTO.getSupport().getUrl()),
+                () -> assertEquals(expectedText, listUsersDTO.getSupport().getText()),
+                () -> assertEquals(expectedURL, singleUserDTO.getSupport().getUrl()),
+                () -> assertEquals(expectedText, singleUserDTO.getSupport().getText()),
+                () -> assertEquals(expectedURL, listResourceDTO.getSupport().getUrl()),
+                () -> assertEquals(expectedText, listResourceDTO.getSupport().getText()),
+                () -> assertEquals(expectedURL, singleResourceResp.getSupport().getUrl()),
+                () -> assertEquals(expectedText, singleResourceResp.getSupport().getText())
         );
     }
 
