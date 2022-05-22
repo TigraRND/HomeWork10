@@ -1,5 +1,6 @@
 package ru.otus.APIHelpers.managers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
@@ -32,6 +33,16 @@ public class ReqResManager {
             return mapper.readValue(new File("src/test/resources/jsonExamples/" + fileName), clazz);
         } catch (IOException exception) {
             log.error("Не найден файл: {}", fileName);
+            return null;
+        }
+    }
+
+    public static String dtoToJson(Object obj) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+        } catch (JsonProcessingException exception) {
+            log.error("Ошибка парсинга объекта в json");
             return null;
         }
     }
