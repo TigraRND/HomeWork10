@@ -15,6 +15,8 @@
 	<description>Урок по изучению API Helpers</description>
 	<properties>
 		<java.version>11</java.version>
+		<retrofit.version>2.9.0</retrofit.version>
+		<jackson.version>2.13.3</jackson.version>
 	</properties>
 	<dependencies>
 
@@ -32,27 +34,27 @@
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>retrofit</artifactId>
-			<version>2.9.0</version>
+			<version>${retrofit.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.squareup.retrofit2</groupId>
 			<artifactId>converter-jackson</artifactId>
-			<version>2.9.0</version>
+			<version>${retrofit.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.13.3</version>
+			<version>${jackson.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.13.3</version>
+			<version>${jackson.version}</version>
 		</dependency>
 
 		<dependency>
