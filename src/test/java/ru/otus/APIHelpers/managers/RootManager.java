@@ -21,6 +21,10 @@ public abstract class RootManager {
                 .build();
     }
 
+    protected <T> T getService(Class<T> clazz) {
+        return retrofit.create(clazz);
+    }
+
     public static <T> T jsonFileToDTO(String fileName, Class<T> clazz) {
         ObjectMapper mapper = new ObjectMapper();
         try {

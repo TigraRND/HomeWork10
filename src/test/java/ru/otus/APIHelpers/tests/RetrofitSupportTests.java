@@ -11,8 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Log4j2
-public class RetrofitSupportTest {
-    UserManager userManager = new UserManager();
+class RetrofitSupportTests {
+    private final UserManager userManager = new UserManager();
     ResourceManager resourceManager = new ResourceManager();
 
     @Test

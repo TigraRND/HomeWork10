@@ -10,11 +10,7 @@ import ru.otus.APIHelpers.dto.responses.UpdateUserResp;
 import ru.otus.APIHelpers.services.UserService;
 
 public class UserManager extends RootManager {
-    private final UserService userService;
-
-    public UserManager() {
-        userService = retrofit.create(UserService.class);
-    }
+    private final UserService userService = getService(UserService.class);
 
     @SneakyThrows
     public Response<ListUsersResp> getUserList(int pageNum) {

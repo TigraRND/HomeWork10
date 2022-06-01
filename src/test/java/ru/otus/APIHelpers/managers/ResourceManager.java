@@ -7,11 +7,7 @@ import ru.otus.APIHelpers.dto.responses.SingleResourceResp;
 import ru.otus.APIHelpers.services.ResourceService;
 
 public class ResourceManager extends RootManager {
-    private final ResourceService resourceService;
-
-    public ResourceManager() {
-        resourceService = retrofit.create(ResourceService.class);
-    }
+    private final ResourceService resourceService = getService(ResourceService.class);
 
     @SneakyThrows
     public Response<ListResourceResp> getResourceList(int pageNum) {

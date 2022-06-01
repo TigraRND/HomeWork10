@@ -13,8 +13,8 @@ import ru.otus.APIHelpers.managers.UserManager;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
-public class RetrofitResourceTest {
-    ResourceManager resourceManager = new ResourceManager();
+class RetrofitResourceTests {
+    private final ResourceManager resourceManager = new ResourceManager();
 
     @Test
     @DisplayName("GET LIST RESOURCE - success")
