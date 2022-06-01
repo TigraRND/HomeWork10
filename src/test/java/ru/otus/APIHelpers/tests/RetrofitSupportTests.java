@@ -20,17 +20,17 @@ class RetrofitSupportTests {
     void checkSupportObject() {
         int pageNum = 1;
         int objectId = 4;
-        SupportResp expectedDTO = UserManager.jsonFileToDTO("SupportDTO.json", SupportResp.class);
+        SupportResp expectedDTO = userManager.jsonFileToDTO("SupportDTO.json", SupportResp.class);
 
         ListUsersResp listUsersDTO = userManager.getUserList(pageNum).body();
         SingleUserResp singleUserDTO = userManager.getUser(objectId).body();
         ListResourceResp listResourceDTO = resourceManager.getResourceList(pageNum).body();
         SingleResourceResp singleResourceResp = resourceManager.getResource(objectId).body();
 
-        log.info("Список пользователей:\n{}", UserManager.dtoToJson(listUsersDTO.getSupport()));
-        log.info("Сингл пользователь:\n{}", UserManager.dtoToJson(singleUserDTO.getSupport()));
-        log.info("Список ресурсов:\n{}", UserManager.dtoToJson(listResourceDTO.getSupport()));
-        log.info("Сингл ресурс:\n{}", UserManager.dtoToJson(singleResourceResp.getSupport()));
+        log.info("Список пользователей:\n{}", userManager.dtoToJson(listUsersDTO.getSupport()));
+        log.info("Сингл пользователь:\n{}", userManager.dtoToJson(singleUserDTO.getSupport()));
+        log.info("Список ресурсов:\n{}", userManager.dtoToJson(listResourceDTO.getSupport()));
+        log.info("Сингл ресурс:\n{}", userManager.dtoToJson(singleResourceResp.getSupport()));
 
         assertAll(
                 () -> assertEquals(expectedDTO, listUsersDTO.getSupport()),

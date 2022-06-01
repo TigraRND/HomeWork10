@@ -34,7 +34,7 @@ class RetrofitUserTests {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(listUsersDTO));
+        log.info(userManager.dtoToJson(listUsersDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -52,7 +52,7 @@ class RetrofitUserTests {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(listUsersDTO));
+        log.info(userManager.dtoToJson(listUsersDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -70,7 +70,7 @@ class RetrofitUserTests {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(singleUserDTO));
+        log.info(userManager.dtoToJson(singleUserDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -90,7 +90,7 @@ class RetrofitUserTests {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(singleUserDTO));
+        log.info(userManager.dtoToJson(singleUserDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
@@ -104,8 +104,8 @@ class RetrofitUserTests {
         Response<CreateUserResp> resp = userManager.createUser(TEST_USER);
         CreateUserResp createUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", UserManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", UserManager.dtoToJson(createUserRespDTO));
+        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
+        log.info("Создан пользователь:\n{}", userManager.dtoToJson(createUserRespDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_CREATED, resp.code()),
@@ -124,8 +124,8 @@ class RetrofitUserTests {
         Response<UpdateUserResp> resp = userManager.updateUserPut(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", UserManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", UserManager.dtoToJson(updateUserRespDTO));
+        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
+        log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -143,8 +143,8 @@ class RetrofitUserTests {
         Response<UpdateUserResp> resp = userManager.updateUserPatch(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", UserManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", UserManager.dtoToJson(updateUserRespDTO));
+        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
+        log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),

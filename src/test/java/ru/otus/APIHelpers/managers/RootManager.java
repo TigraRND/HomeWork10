@@ -12,7 +12,9 @@ import java.io.IOException;
 @Log4j2
 public abstract class RootManager {
     protected static final String BASE_URL = "https:/reqres.in/api/";
-    Retrofit retrofit;
+    protected Retrofit retrofit;
+
+    private final ObjectMapper mapper = new ObjectMapper();
 
     public RootManager() {
         retrofit = new Retrofit.Builder()
@@ -25,8 +27,7 @@ public abstract class RootManager {
         return retrofit.create(clazz);
     }
 
-    public static <T> T jsonFileToDTO(String fileName, Class<T> clazz) {
-        ObjectMapper mapper = new ObjectMapper();
+    public <T> T jsonFileToDTO(String fileName, Class<T> clazz) {
         try {
             return mapper.readValue(new File("src/test/resources/jsonExamples/" + fileName), clazz);
         } catch (IOException exception) {
@@ -35,8 +36,7 @@ public abstract class RootManager {
         }
     }
 
-    public static String dtoToJson(Object obj) {
-        ObjectMapper mapper = new ObjectMapper();
+    public String dtoToJson(Object obj) {
         try {
             return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
         } catch (JsonProcessingException exception) {

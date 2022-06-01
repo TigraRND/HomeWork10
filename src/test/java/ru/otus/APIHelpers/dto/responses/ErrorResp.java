@@ -7,6 +7,6 @@ import lombok.Getter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
-public class RegisterErrorResp {
+public class ErrorResp {
     private String error;
 }

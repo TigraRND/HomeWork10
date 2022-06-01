@@ -23,7 +23,7 @@ class RetrofitResourceTests {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(listResourceDTO));
+        log.info(resourceManager.dtoToJson(listResourceDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -41,7 +41,7 @@ class RetrofitResourceTests {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(listResourceDTO));
+        log.info(resourceManager.dtoToJson(listResourceDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -58,7 +58,7 @@ class RetrofitResourceTests {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(singleResourceDTO));
+        log.info(resourceManager.dtoToJson(singleResourceDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_OK, resp.code()),
@@ -78,7 +78,7 @@ class RetrofitResourceTests {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        log.info(UserManager.dtoToJson(singleResourceDTO));
+        log.info(resourceManager.dtoToJson(singleResourceDTO));
 
         assertAll(
                 () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
