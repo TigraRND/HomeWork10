@@ -20,6 +20,13 @@ public class UserManager extends RootManager {
     }
 
     @SneakyThrows
+    public Response<ListUsersResp> getUserList(int pageNum, int delay) {
+        return userService
+                .getUserList(pageNum, delay)
+                .execute();
+    }
+
+    @SneakyThrows
     public Response<SingleUserResp> getUser(int userId) {
         return userService
                 .getUser(userId)

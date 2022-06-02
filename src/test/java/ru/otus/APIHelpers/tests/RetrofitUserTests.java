@@ -163,4 +163,24 @@ class RetrofitUserTests {
         Response<Void> resp = userManager.deleteUser(userId);
         assertEquals(HttpStatus.SC_NO_CONTENT, resp.code());
     }
+
+    @Test
+    @DisplayName("GET LIST USERS - delayed")
+    void checkDelayedResponse() {
+        int pageNum = 2;
+        int delay = 3;
+        Response<ListUsersResp> resp = userManager.getUserList(pageNum, delay);
+        ListUsersResp listUsersDTO = resp.body();
+
+        log.info(userManager.dtoToJson(listUsersDTO));
+
+        assertAll(
+                () -> assertTrue(resp.isSuccessful()),
+                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(pageNum, listUsersDTO.getPage()),
+                () -> assertEquals(listUsersDTO.getPerPage(), listUsersDTO.getData().size()),
+                () -> assertNotNull(listUsersDTO.getData().get(0)),
+                () -> assertNotNull(listUsersDTO.getSupport())
+        );
+    }
 }

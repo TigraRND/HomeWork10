@@ -40,7 +40,7 @@ public class RetrofitAuthorizationTests {
 
     @Test
     @DisplayName("POST LOGIN - user not found")
-    public void checkIncorrectUserOnRegistration() {
+    public void checkIncorrectUserOnAuthorization() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail("test@gmail.com");
         reqBody.setPassword(PASSWORD);
@@ -59,7 +59,7 @@ public class RetrofitAuthorizationTests {
 
     @Test
     @DisplayName("POST LOGIN - miss password")
-    public void checkMissPasswordOnRegistration() {
+    public void checkMissPasswordOnAuthorization() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail(VALID_LOGIN);
 
@@ -77,7 +77,7 @@ public class RetrofitAuthorizationTests {
 
     @Test
     @DisplayName("POST LOGIN - miss login")
-    public void checkMissLoginOnRegistration() {
+    public void checkMissLoginOnAuthorization() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setPassword(PASSWORD);
 
@@ -95,7 +95,7 @@ public class RetrofitAuthorizationTests {
 
     @Test
     @DisplayName("POST LOGIN - empty credentials")
-    public void checkEmptyCredentialsOnRegistration() {
+    public void checkEmptyCredentialsOnAuthorization() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
