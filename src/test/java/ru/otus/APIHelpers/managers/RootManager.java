@@ -2,9 +2,13 @@ package ru.otus.APIHelpers.managers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
+import ru.otus.APIHelpers.dto.responses.ErrorResp;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +29,15 @@ public abstract class RootManager {
 
     protected <T> T getService(Class<T> clazz) {
         return retrofit.create(clazz);
+    }
+
+    @SneakyThrows
+    public <T> T getBody(Response<ResponseBody> response, Class<T> clazz) {
+        if (clazz.isAssignableFrom(ErrorResp.class)) {
+            return mapper.readValue(response.errorBody().string(), clazz);
+        } else {
+            return mapper.readValue(response.body().string(), clazz);
+        }
     }
 
     public <T> T jsonFileToDTO(String fileName, Class<T> clazz) {
