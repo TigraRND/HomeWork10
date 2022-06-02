@@ -7,7 +7,7 @@ import lombok.Getter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
-public class RegisterSuccessResp {
+public class AuthSuccessResp {
     private String id;
     private String token;
 }
