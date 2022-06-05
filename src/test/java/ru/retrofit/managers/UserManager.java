@@ -1,6 +1,7 @@
 package ru.retrofit.managers;
 
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
 import ru.retrofit.dto.requests.CreateUserReq;
@@ -12,7 +13,8 @@ import ru.retrofit.services.UserService;
 
 @Component
 public class UserManager extends RootManager {
-    private final UserService userService = getService(UserService.class);
+    @Autowired
+    private UserService userService;
 
     @SneakyThrows
     public Response<ListUsersResp> getUserList(int pageNum) {
