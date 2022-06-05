@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import okhttp3.ResponseBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
 import ru.otus.APIHelpers.dto.requests.LoginPasswordReq;
 import ru.otus.APIHelpers.dto.responses.AuthSuccessResp;
@@ -14,6 +15,7 @@ import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
+@SpringBootTest
 public class RetrofitAuthorizationTests {
     private final AuthManager authManager = new AuthManager();
     private final static String VALID_LOGIN = "eve.holt@reqres.in";

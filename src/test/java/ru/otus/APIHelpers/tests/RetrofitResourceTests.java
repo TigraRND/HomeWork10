@@ -3,6 +3,7 @@ package ru.otus.APIHelpers.tests;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
 import ru.otus.APIHelpers.dto.responses.ListResourceResp;
 import ru.otus.APIHelpers.dto.responses.SingleResourceResp;
@@ -12,6 +13,7 @@ import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
+@SpringBootTest
 class RetrofitResourceTests {
     private final ResourceManager resourceManager = new ResourceManager();
 
