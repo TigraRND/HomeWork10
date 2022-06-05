@@ -1,15 +1,14 @@
 package ru.otus.APIHelpers.tests;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
 import ru.otus.APIHelpers.dto.responses.ListResourceResp;
 import ru.otus.APIHelpers.dto.responses.SingleResourceResp;
 import ru.otus.APIHelpers.managers.ResourceManager;
-import ru.otus.APIHelpers.managers.UserManager;
 
+import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
@@ -26,7 +25,7 @@ class RetrofitResourceTests {
         log.info(resourceManager.dtoToJson(listResourceDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(pageNum, listResourceDTO.getPage()),
                 () -> assertEquals(listResourceDTO.getPerPage(), listResourceDTO.getData().size()),
                 () -> assertNotNull(listResourceDTO.getData().get(0)),
@@ -44,7 +43,7 @@ class RetrofitResourceTests {
         log.info(resourceManager.dtoToJson(listResourceDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(pageNum, listResourceDTO.getPage()),
                 () -> assertEquals(0, listResourceDTO.getData().size()),
                 () -> assertNotNull(listResourceDTO.getSupport())
@@ -61,7 +60,7 @@ class RetrofitResourceTests {
         log.info(resourceManager.dtoToJson(singleResourceDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(resourceId, singleResourceDTO.getData().getId()),
                 () -> assertEquals("honeysuckle", singleResourceDTO.getData().getName()),
                 () -> assertEquals(2011, singleResourceDTO.getData().getYear()),
@@ -81,7 +80,7 @@ class RetrofitResourceTests {
         log.info(resourceManager.dtoToJson(singleResourceDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
+                () -> assertEquals(HTTP_NOT_FOUND, resp.code()),
                 () -> assertNull(singleResourceDTO)
         );
     }

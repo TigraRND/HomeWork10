@@ -2,7 +2,6 @@ package ru.otus.APIHelpers.tests;
 
 import lombok.extern.log4j.Log4j2;
 import okhttp3.ResponseBody;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import retrofit2.Response;
@@ -11,6 +10,7 @@ import ru.otus.APIHelpers.dto.responses.AuthSuccessResp;
 import ru.otus.APIHelpers.dto.responses.ErrorResp;
 import ru.otus.APIHelpers.managers.AuthManager;
 
+import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
@@ -33,7 +33,7 @@ public class RetrofitRegisterTests {
         log.info(authManager.dtoToJson(registerSuccessDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, response.code()),
+                () -> assertEquals(HTTP_OK, response.code()),
                 () -> assertNotNull(registerSuccessDTO.getId()),
                 () -> assertNotNull(registerSuccessDTO.getToken())
         );
@@ -53,7 +53,7 @@ public class RetrofitRegisterTests {
         log.info(authManager.dtoToJson(errorDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.code()),
+                () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
                 () -> assertEquals("Note: Only defined users succeed registration", errorDTO.getError())
         );
     }
@@ -71,7 +71,7 @@ public class RetrofitRegisterTests {
         log.info(authManager.dtoToJson(errorDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.code()),
+                () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
                 () -> assertEquals("Missing password", errorDTO.getError())
         );
     }
@@ -89,7 +89,7 @@ public class RetrofitRegisterTests {
         log.info(authManager.dtoToJson(errorDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.code()),
+                () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
                 () -> assertEquals("Missing email or username", errorDTO.getError())
         );
     }
@@ -106,7 +106,7 @@ public class RetrofitRegisterTests {
         log.info(authManager.dtoToJson(errorDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_BAD_REQUEST, response.code()),
+                () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
                 () -> assertEquals("Missing email or username", errorDTO.getError())
         );
     }

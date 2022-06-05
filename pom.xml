@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.2</version>
+		<version>2.6.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.otus</groupId>
 	<artifactId>APIHelpers</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>APIHelpers</name>
-	<description>Урок по изучению API Helpers</description>
+	<name>Retrofit</name>
+	<description>Пример использования Retrofit для тестирования API</description>
 	<properties>
 		<java.version>11</java.version>
 		<retrofit.version>2.9.0</retrofit.version>
@@ -23,11 +23,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<version>2.6.7</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>2.6.7</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -58,16 +60,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>4.4.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.7.0</version>
+			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -102,8 +97,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>

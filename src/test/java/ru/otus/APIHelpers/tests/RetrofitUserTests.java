@@ -1,7 +1,6 @@
 package ru.otus.APIHelpers.tests;
 
 import lombok.extern.log4j.Log4j2;
-import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +12,7 @@ import ru.otus.APIHelpers.dto.responses.SingleUserResp;
 import ru.otus.APIHelpers.dto.responses.UpdateUserResp;
 import ru.otus.APIHelpers.managers.UserManager;
 
+import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
@@ -37,7 +37,7 @@ class RetrofitUserTests {
         log.info(userManager.dtoToJson(listUsersDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(pageNum, listUsersDTO.getPage()),
                 () -> assertEquals(listUsersDTO.getPerPage(), listUsersDTO.getData().size()),
                 () -> assertNotNull(listUsersDTO.getData().get(0)),
@@ -55,7 +55,7 @@ class RetrofitUserTests {
         log.info(userManager.dtoToJson(listUsersDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(pageNum, listUsersDTO.getPage()),
                 () -> assertEquals(0, listUsersDTO.getData().size()),
                 () -> assertNotNull(listUsersDTO.getSupport())
@@ -73,7 +73,7 @@ class RetrofitUserTests {
         log.info(userManager.dtoToJson(singleUserDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(userId, singleUserDTO.getData().getId()),
                 () -> assertEquals("byron.fields@reqres.in", singleUserDTO.getData().getEmail()),
                 () -> assertEquals("Byron", singleUserDTO.getData().getFirstName()),
@@ -93,7 +93,7 @@ class RetrofitUserTests {
         log.info(userManager.dtoToJson(singleUserDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_NOT_FOUND, resp.code()),
+                () -> assertEquals(HTTP_NOT_FOUND, resp.code()),
                 () -> assertNull(singleUserDTO)
         );
     }
@@ -108,7 +108,7 @@ class RetrofitUserTests {
         log.info("Создан пользователь:\n{}", userManager.dtoToJson(createUserRespDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_CREATED, resp.code()),
+                () -> assertEquals(HTTP_CREATED, resp.code()),
                 () -> assertEquals(TEST_USER.getFirstName(), createUserRespDTO.getFirstName()),
                 () -> assertEquals(TEST_USER.getLastName(), createUserRespDTO.getLastName()),
                 () -> assertEquals(TEST_USER.getJob(), createUserRespDTO.getJob()),
@@ -128,7 +128,7 @@ class RetrofitUserTests {
         log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(TEST_USER.getFirstName(), updateUserRespDTO.getFirstName()),
                 () -> assertEquals(TEST_USER.getLastName(), updateUserRespDTO.getLastName()),
                 () -> assertEquals(TEST_USER.getJob(), updateUserRespDTO.getJob()),
@@ -147,7 +147,7 @@ class RetrofitUserTests {
         log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
 
         assertAll(
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(TEST_USER.getFirstName(), updateUserRespDTO.getFirstName()),
                 () -> assertEquals(TEST_USER.getLastName(), updateUserRespDTO.getLastName()),
                 () -> assertEquals(TEST_USER.getJob(), updateUserRespDTO.getJob()),
@@ -161,7 +161,7 @@ class RetrofitUserTests {
     void checkUserDeleting() {
         int userId = 2;
         Response<Void> resp = userManager.deleteUser(userId);
-        assertEquals(HttpStatus.SC_NO_CONTENT, resp.code());
+        assertEquals(HTTP_NO_CONTENT, resp.code());
     }
 
     @Test
@@ -176,7 +176,7 @@ class RetrofitUserTests {
 
         assertAll(
                 () -> assertTrue(resp.isSuccessful()),
-                () -> assertEquals(HttpStatus.SC_OK, resp.code()),
+                () -> assertEquals(HTTP_OK, resp.code()),
                 () -> assertEquals(pageNum, listUsersDTO.getPage()),
                 () -> assertEquals(listUsersDTO.getPerPage(), listUsersDTO.getData().size()),
                 () -> assertNotNull(listUsersDTO.getData().get(0)),
