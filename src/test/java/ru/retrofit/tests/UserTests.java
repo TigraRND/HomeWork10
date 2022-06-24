@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 @SpringBootTest
-class RetrofitUserTests {
+class UserTests {
     @Autowired
     private UserManager userManager;
 

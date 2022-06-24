@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Log4j2
 @SpringBootTest
-class RetrofitSupportTests {
+class SupportTests {
     @Autowired
     private UserManager userManager;
 

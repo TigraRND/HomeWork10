@@ -17,39 +17,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 @SpringBootTest
-public class RetrofitAuthorizationTests {
+public class RegisterTests {
     @Autowired
     private AuthManager authManager;
     private final static String VALID_LOGIN = "eve.holt@reqres.in";
     private final static String PASSWORD = "12345678";
 
     @Test
-    @DisplayName("POST LOGIN - success")
-    public void checkUserSuccessAuthorization() {
+    @DisplayName("POST REGISTER - success")
+    public void checkUserSuccessRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail(VALID_LOGIN);
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        AuthSuccessResp authSuccessDTO = authManager.getBody(response, AuthSuccessResp.class);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
+        AuthSuccessResp registerSuccessDTO = authManager.getBody(response, AuthSuccessResp.class);
 
         log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(authSuccessDTO));
+        log.info(authManager.dtoToJson(registerSuccessDTO));
 
         assertAll(
                 () -> assertEquals(HTTP_OK, response.code()),
-                () -> assertNotNull(authSuccessDTO.getToken())
+                () -> assertNotNull(registerSuccessDTO.getId()),
+                () -> assertNotNull(registerSuccessDTO.getToken())
         );
     }
 
     @Test
-    @DisplayName("POST LOGIN - user not found")
-    public void checkIncorrectUserOnAuthorization() {
+    @DisplayName("POST REGISTER - incorrect user")
+    public void checkIncorrectUserOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail("test@gmail.com");
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
         log.info(authManager.dtoToJson(reqBody));
@@ -57,17 +58,17 @@ public class RetrofitAuthorizationTests {
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
-                () -> assertEquals("user not found", errorDTO.getError())
+                () -> assertEquals("Note: Only defined users succeed registration", errorDTO.getError())
         );
     }
 
     @Test
-    @DisplayName("POST LOGIN - miss password")
-    public void checkMissPasswordOnAuthorization() {
+    @DisplayName("POST REGISTER - miss password")
+    public void checkMissPasswordOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail(VALID_LOGIN);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
         log.info(authManager.dtoToJson(reqBody));
@@ -80,12 +81,12 @@ public class RetrofitAuthorizationTests {
     }
 
     @Test
-    @DisplayName("POST LOGIN - miss login")
-    public void checkMissLoginOnAuthorization() {
+    @DisplayName("POST REGISTER - miss login")
+    public void checkMissLoginOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
         log.info(authManager.dtoToJson(reqBody));
@@ -98,11 +99,11 @@ public class RetrofitAuthorizationTests {
     }
 
     @Test
-    @DisplayName("POST LOGIN - empty credentials")
-    public void checkEmptyCredentialsOnAuthorization() {
+    @DisplayName("POST REGISTER - empty credentials")
+    public void checkEmptyCredentialsOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
         log.info(authManager.dtoToJson(reqBody));

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 @SpringBootTest
-class RetrofitResourceTests {
+class ResourceTests {
     @Autowired
     private ResourceManager resourceManager;
 
