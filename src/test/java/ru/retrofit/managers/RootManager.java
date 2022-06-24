@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Log4j2
 public abstract class RootManager {
-    protected static final String BASE_URL = "https:/reqres.in/api/";
+    private static final String BASE_URL = "https:/reqres.in/api/";
     protected Retrofit retrofit;
 
     private final ObjectMapper mapper = new ObjectMapper();

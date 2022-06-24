@@ -22,7 +22,7 @@ class RetrofitUserTests {
     @Autowired
     private UserManager userManager;
 
-    private final CreateUserReq TEST_USER = new CreateUserReq(
+    private static final CreateUserReq TEST_USER = new CreateUserReq(
             "Ronald",
             "MacDonald",
             "Clown",

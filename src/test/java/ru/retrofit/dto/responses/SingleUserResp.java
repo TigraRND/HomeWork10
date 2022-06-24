@@ -9,9 +9,7 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 public class SingleUserResp {
-    @JsonProperty("data")
     private UserDataResp data;
-    @JsonProperty("support")
     private SupportResp support;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
