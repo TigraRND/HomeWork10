@@ -1,23 +1,21 @@
-package ru.retrofit.tests;
+package ru.retrofit.reqres.in.tests;
 
-import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
-import ru.retrofit.dto.requests.CreateUserReq;
-import ru.retrofit.dto.responses.CreateUserResp;
-import ru.retrofit.dto.responses.ListUsersResp;
-import ru.retrofit.dto.responses.SingleUserResp;
-import ru.retrofit.dto.responses.UpdateUserResp;
+import ru.retrofit.reqres.in.dto.requests.CreateUserReq;
+import ru.retrofit.reqres.in.dto.responses.CreateUserResp;
+import ru.retrofit.reqres.in.dto.responses.ListUsersResp;
+import ru.retrofit.reqres.in.dto.responses.SingleUserResp;
+import ru.retrofit.reqres.in.dto.responses.UpdateUserResp;
 import ru.retrofit.helpers.RootUtils;
-import ru.retrofit.managers.UserManager;
+import ru.retrofit.reqres.in.managers.UserManager;
 
 import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Log4j2
 @SpringBootTest
 class UserTests extends RootUtils {
     @Autowired

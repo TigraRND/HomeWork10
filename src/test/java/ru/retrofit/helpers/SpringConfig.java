@@ -3,9 +3,9 @@ package ru.retrofit.helpers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import ru.retrofit.services.AuthorizationService;
-import ru.retrofit.services.ResourceService;
-import ru.retrofit.services.UserService;
+import ru.retrofit.reqres.in.services.AuthorizationService;
+import ru.retrofit.reqres.in.services.ResourceService;
+import ru.retrofit.reqres.in.services.UserService;
 
 @Configuration
 @ComponentScan("ru.retrofit")

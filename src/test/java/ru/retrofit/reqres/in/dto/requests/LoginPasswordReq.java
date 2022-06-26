@@ -1,4 +1,4 @@
-package ru.retrofit.dto.requests;
+package ru.retrofit.reqres.in.dto.requests;
 
 import lombok.Getter;
 import lombok.Setter;

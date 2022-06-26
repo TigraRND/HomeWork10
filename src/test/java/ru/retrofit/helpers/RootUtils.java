@@ -6,7 +6,7 @@ import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
-import ru.retrofit.dto.responses.ErrorResp;
+import ru.retrofit.reqres.in.dto.responses.ErrorResp;
 
 import java.io.File;
 import java.io.IOException;

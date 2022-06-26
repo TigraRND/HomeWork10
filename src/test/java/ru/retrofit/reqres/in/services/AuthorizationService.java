@@ -1,10 +1,10 @@
-package ru.retrofit.services;
+package ru.retrofit.reqres.in.services;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import ru.retrofit.dto.requests.LoginPasswordReq;
+import ru.retrofit.reqres.in.dto.requests.LoginPasswordReq;
 
 public interface AuthorizationService {
 

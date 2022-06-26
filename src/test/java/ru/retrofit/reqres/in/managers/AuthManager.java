@@ -1,12 +1,12 @@
-package ru.retrofit.managers;
+package ru.retrofit.reqres.in.managers;
 
 import lombok.SneakyThrows;
 import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
-import ru.retrofit.dto.requests.LoginPasswordReq;
-import ru.retrofit.services.AuthorizationService;
+import ru.retrofit.reqres.in.dto.requests.LoginPasswordReq;
+import ru.retrofit.reqres.in.services.AuthorizationService;
 
 @Component
 public class AuthManager {

@@ -1,13 +1,13 @@
-package ru.retrofit.tests;
+package ru.retrofit.reqres.in.tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.retrofit.dto.responses.*;
 import ru.retrofit.helpers.RootUtils;
-import ru.retrofit.managers.ResourceManager;
-import ru.retrofit.managers.UserManager;
+import ru.retrofit.reqres.in.dto.responses.*;
+import ru.retrofit.reqres.in.managers.ResourceManager;
+import ru.retrofit.reqres.in.managers.UserManager;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

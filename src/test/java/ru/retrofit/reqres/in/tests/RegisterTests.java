@@ -1,4 +1,4 @@
-package ru.retrofit.tests;
+package ru.retrofit.reqres.in.tests;
 
 import okhttp3.ResponseBody;
 import org.junit.jupiter.api.DisplayName;
@@ -6,50 +6,51 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
-import ru.retrofit.dto.requests.LoginPasswordReq;
-import ru.retrofit.dto.responses.AuthSuccessResp;
-import ru.retrofit.dto.responses.ErrorResp;
+import ru.retrofit.reqres.in.dto.requests.LoginPasswordReq;
+import ru.retrofit.reqres.in.dto.responses.AuthSuccessResp;
+import ru.retrofit.reqres.in.dto.responses.ErrorResp;
 import ru.retrofit.helpers.RootUtils;
-import ru.retrofit.managers.AuthManager;
+import ru.retrofit.reqres.in.managers.AuthManager;
 
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class AuthorizationTests extends RootUtils {
+public class RegisterTests extends RootUtils {
     @Autowired
     private AuthManager authManager;
     private final static String VALID_LOGIN = "eve.holt@reqres.in";
     private final static String PASSWORD = "12345678";
 
     @Test
-    @DisplayName("POST LOGIN - success")
-    public void checkUserSuccessAuthorization() {
+    @DisplayName("POST REGISTER - success")
+    public void checkUserSuccessRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail(VALID_LOGIN);
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        AuthSuccessResp authSuccessDTO = getBody(response, AuthSuccessResp.class);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
+        AuthSuccessResp registerSuccessDTO = getBody(response, AuthSuccessResp.class);
 
         logBody(reqBody);
-        logBody(authSuccessDTO);
+        logBody(registerSuccessDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, response.code()),
-                () -> assertNotNull(authSuccessDTO.getToken())
+                () -> assertNotNull(registerSuccessDTO.getId()),
+                () -> assertNotNull(registerSuccessDTO.getToken())
         );
     }
 
     @Test
-    @DisplayName("POST LOGIN - user not found")
-    public void checkIncorrectUserOnAuthorization() {
+    @DisplayName("POST REGISTER - incorrect user")
+    public void checkIncorrectUserOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail("test@gmail.com");
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
@@ -57,17 +58,17 @@ public class AuthorizationTests extends RootUtils {
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
-                () -> assertEquals("user not found", errorDTO.getError())
+                () -> assertEquals("Note: Only defined users succeed registration", errorDTO.getError())
         );
     }
 
     @Test
-    @DisplayName("POST LOGIN - miss password")
-    public void checkMissPasswordOnAuthorization() {
+    @DisplayName("POST REGISTER - miss password")
+    public void checkMissPasswordOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setEmail(VALID_LOGIN);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
@@ -80,12 +81,12 @@ public class AuthorizationTests extends RootUtils {
     }
 
     @Test
-    @DisplayName("POST LOGIN - miss login")
-    public void checkMissLoginOnAuthorization() {
+    @DisplayName("POST REGISTER - miss login")
+    public void checkMissLoginOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
         reqBody.setPassword(PASSWORD);
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
@@ -98,11 +99,11 @@ public class AuthorizationTests extends RootUtils {
     }
 
     @Test
-    @DisplayName("POST LOGIN - empty credentials")
-    public void checkEmptyCredentialsOnAuthorization() {
+    @DisplayName("POST REGISTER - empty credentials")
+    public void checkEmptyCredentialsOnRegistration() {
         LoginPasswordReq reqBody = new LoginPasswordReq();
 
-        Response<ResponseBody> response = authManager.userAuthorization(reqBody);
+        Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);

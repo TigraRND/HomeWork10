@@ -1,15 +1,15 @@
-package ru.retrofit.managers;
+package ru.retrofit.reqres.in.managers;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
-import ru.retrofit.dto.requests.CreateUserReq;
-import ru.retrofit.dto.responses.CreateUserResp;
-import ru.retrofit.dto.responses.ListUsersResp;
-import ru.retrofit.dto.responses.SingleUserResp;
-import ru.retrofit.dto.responses.UpdateUserResp;
-import ru.retrofit.services.UserService;
+import ru.retrofit.reqres.in.dto.requests.CreateUserReq;
+import ru.retrofit.reqres.in.dto.responses.CreateUserResp;
+import ru.retrofit.reqres.in.dto.responses.ListUsersResp;
+import ru.retrofit.reqres.in.dto.responses.SingleUserResp;
+import ru.retrofit.reqres.in.dto.responses.UpdateUserResp;
+import ru.retrofit.reqres.in.services.UserService;
 
 @Component
 public class UserManager {

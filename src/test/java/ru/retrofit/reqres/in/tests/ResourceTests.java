@@ -1,14 +1,14 @@
-package ru.retrofit.tests;
+package ru.retrofit.reqres.in.tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
-import ru.retrofit.dto.responses.ListResourceResp;
-import ru.retrofit.dto.responses.SingleResourceResp;
+import ru.retrofit.reqres.in.dto.responses.ListResourceResp;
+import ru.retrofit.reqres.in.dto.responses.SingleResourceResp;
 import ru.retrofit.helpers.RootUtils;
-import ru.retrofit.managers.ResourceManager;
+import ru.retrofit.reqres.in.managers.ResourceManager;
 
 import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_OK;
