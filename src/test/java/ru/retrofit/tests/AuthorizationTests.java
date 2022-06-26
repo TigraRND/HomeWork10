@@ -31,7 +31,7 @@ public class AuthorizationTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        AuthSuccessResp authSuccessDTO = authManager.getBody(response, AuthSuccessResp.class);
+        AuthSuccessResp authSuccessDTO = getBody(response, AuthSuccessResp.class);
 
         logBody(reqBody);
         logBody(authSuccessDTO);
@@ -50,7 +50,7 @@ public class AuthorizationTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -68,7 +68,7 @@ public class AuthorizationTests extends RootUtils {
         reqBody.setEmail(VALID_LOGIN);
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -86,7 +86,7 @@ public class AuthorizationTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -103,7 +103,7 @@ public class AuthorizationTests extends RootUtils {
         LoginPasswordReq reqBody = new LoginPasswordReq();
 
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);

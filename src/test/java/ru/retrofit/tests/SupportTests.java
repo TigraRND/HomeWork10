@@ -1,6 +1,5 @@
 package ru.retrofit.tests;
 
-import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ class SupportTests extends RootUtils {
     void checkSupportObject() {
         int pageNum = 1;
         int objectId = 4;
-        SupportResp expectedDTO = userManager.jsonFileToDTO("SupportDTO.json", SupportResp.class);
+        SupportResp expectedDTO = jsonFileToDTO("SupportDTO.json", SupportResp.class);
 
         ListUsersResp listUsersDTO = userManager.getUserList(pageNum).body();
         SingleUserResp singleUserDTO = userManager.getUser(objectId).body();

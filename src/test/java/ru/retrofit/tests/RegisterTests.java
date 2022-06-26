@@ -31,7 +31,7 @@ public class RegisterTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
-        AuthSuccessResp registerSuccessDTO = authManager.getBody(response, AuthSuccessResp.class);
+        AuthSuccessResp registerSuccessDTO = getBody(response, AuthSuccessResp.class);
 
         logBody(reqBody);
         logBody(registerSuccessDTO);
@@ -51,7 +51,7 @@ public class RegisterTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -69,7 +69,7 @@ public class RegisterTests extends RootUtils {
         reqBody.setEmail(VALID_LOGIN);
 
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -87,7 +87,7 @@ public class RegisterTests extends RootUtils {
         reqBody.setPassword(PASSWORD);
 
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);
@@ -104,7 +104,7 @@ public class RegisterTests extends RootUtils {
         LoginPasswordReq reqBody = new LoginPasswordReq();
 
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
-        ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
+        ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
         logBody(reqBody);
         logBody(errorDTO);

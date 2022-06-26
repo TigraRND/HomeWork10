@@ -9,11 +9,10 @@ import ru.retrofit.dto.responses.CreateUserResp;
 import ru.retrofit.dto.responses.ListUsersResp;
 import ru.retrofit.dto.responses.SingleUserResp;
 import ru.retrofit.dto.responses.UpdateUserResp;
-import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.services.UserService;
 
 @Component
-public class UserManager extends RootUtils {
+public class UserManager {
     @Autowired
     private UserService userService;
 
