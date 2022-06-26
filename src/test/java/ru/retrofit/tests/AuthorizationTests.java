@@ -1,6 +1,5 @@
 package ru.retrofit.tests;
 
-import lombok.extern.log4j.Log4j2;
 import okhttp3.ResponseBody;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,14 +9,15 @@ import retrofit2.Response;
 import ru.retrofit.dto.requests.LoginPasswordReq;
 import ru.retrofit.dto.responses.AuthSuccessResp;
 import ru.retrofit.dto.responses.ErrorResp;
+import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.managers.AuthManager;
 
-import static java.net.HttpURLConnection.*;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_OK;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Log4j2
 @SpringBootTest
-public class AuthorizationTests {
+public class AuthorizationTests extends RootUtils {
     @Autowired
     private AuthManager authManager;
     private final static String VALID_LOGIN = "eve.holt@reqres.in";
@@ -33,8 +33,8 @@ public class AuthorizationTests {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         AuthSuccessResp authSuccessDTO = authManager.getBody(response, AuthSuccessResp.class);
 
-        log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(authSuccessDTO));
+        logBody(reqBody);
+        logBody(authSuccessDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, response.code()),
@@ -52,8 +52,8 @@ public class AuthorizationTests {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
-        log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(errorDTO));
+        logBody(reqBody);
+        logBody(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -70,8 +70,8 @@ public class AuthorizationTests {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
-        log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(errorDTO));
+        logBody(reqBody);
+        logBody(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -88,8 +88,8 @@ public class AuthorizationTests {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
-        log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(errorDTO));
+        logBody(reqBody);
+        logBody(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -105,8 +105,8 @@ public class AuthorizationTests {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = authManager.getBody(response, ErrorResp.class);
 
-        log.info(authManager.dtoToJson(reqBody));
-        log.info(authManager.dtoToJson(errorDTO));
+        logBody(reqBody);
+        logBody(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),

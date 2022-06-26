@@ -33,12 +33,16 @@ public abstract class RootUtils {
         }
     }
 
-    public String dtoToJson(Object obj) {
+    public void logBody(Object obj, String message) {
+        String parametrizedMessage = message + ":\n{}";
         try {
-            return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
+            log.info(parametrizedMessage, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj));
         } catch (JsonProcessingException exception) {
             log.error("Ошибка парсинга объекта в json");
-            return null;
         }
+    }
+
+    public void logBody(Object obj) {
+        logBody(obj, "Тело сообщения");
     }
 }

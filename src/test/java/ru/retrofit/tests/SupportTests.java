@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.retrofit.dto.responses.*;
+import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.managers.ResourceManager;
 import ru.retrofit.managers.UserManager;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Log4j2
 @SpringBootTest
-class SupportTests {
+class SupportTests extends RootUtils {
     @Autowired
     private UserManager userManager;
 
@@ -33,10 +33,10 @@ class SupportTests {
         ListResourceResp listResourceDTO = resourceManager.getResourceList(pageNum).body();
         SingleResourceResp singleResourceResp = resourceManager.getResource(objectId).body();
 
-        log.info("Список пользователей:\n{}", userManager.dtoToJson(listUsersDTO.getSupport()));
-        log.info("Сингл пользователь:\n{}", userManager.dtoToJson(singleUserDTO.getSupport()));
-        log.info("Список ресурсов:\n{}", userManager.dtoToJson(listResourceDTO.getSupport()));
-        log.info("Сингл ресурс:\n{}", userManager.dtoToJson(singleResourceResp.getSupport()));
+        logBody(listUsersDTO.getSupport(), "Список пользователей");
+        logBody(singleUserDTO.getSupport(), "Сингл пользователь");
+        logBody(listResourceDTO.getSupport(), "Список ресурсов");
+        logBody(singleResourceResp.getSupport(), "Сингл ресурс");
 
         assertAll(
                 () -> assertEquals(expectedDTO, listUsersDTO.getSupport()),

@@ -11,6 +11,7 @@ import ru.retrofit.dto.responses.CreateUserResp;
 import ru.retrofit.dto.responses.ListUsersResp;
 import ru.retrofit.dto.responses.SingleUserResp;
 import ru.retrofit.dto.responses.UpdateUserResp;
+import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.managers.UserManager;
 
 import static java.net.HttpURLConnection.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @Log4j2
 @SpringBootTest
-class UserTests {
+class UserTests extends RootUtils {
     @Autowired
     private UserManager userManager;
 
@@ -36,7 +37,7 @@ class UserTests {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        log.info(userManager.dtoToJson(listUsersDTO));
+        logBody(listUsersDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -54,7 +55,7 @@ class UserTests {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        log.info(userManager.dtoToJson(listUsersDTO));
+        logBody(listUsersDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -72,7 +73,7 @@ class UserTests {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        log.info(userManager.dtoToJson(singleUserDTO));
+        logBody(singleUserDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -92,7 +93,7 @@ class UserTests {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        log.info(userManager.dtoToJson(singleUserDTO));
+        logBody(singleUserDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_NOT_FOUND, resp.code()),
@@ -106,8 +107,8 @@ class UserTests {
         Response<CreateUserResp> resp = userManager.createUser(TEST_USER);
         CreateUserResp createUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", userManager.dtoToJson(createUserRespDTO));
+        logBody(TEST_USER, "Создаем пользователя");
+        logBody(createUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_CREATED, resp.code()),
@@ -126,8 +127,8 @@ class UserTests {
         Response<UpdateUserResp> resp = userManager.updateUserPut(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
+        logBody(TEST_USER, "Создаем пользователя");
+        logBody(updateUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -145,8 +146,8 @@ class UserTests {
         Response<UpdateUserResp> resp = userManager.updateUserPatch(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        log.info("Создаем пользователя:\n{}", userManager.dtoToJson(TEST_USER));
-        log.info("Создан пользователь:\n{}", userManager.dtoToJson(updateUserRespDTO));
+        logBody(TEST_USER, "Создаем пользователя");
+        logBody(updateUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -174,7 +175,7 @@ class UserTests {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum, delay);
         ListUsersResp listUsersDTO = resp.body();
 
-        log.info(userManager.dtoToJson(listUsersDTO));
+        logBody(listUsersDTO);
 
         assertAll(
                 () -> assertTrue(resp.isSuccessful()),

@@ -1,6 +1,5 @@
 package ru.retrofit.tests;
 
-import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +7,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import retrofit2.Response;
 import ru.retrofit.dto.responses.ListResourceResp;
 import ru.retrofit.dto.responses.SingleResourceResp;
+import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.managers.ResourceManager;
 
-import static java.net.HttpURLConnection.*;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
+import static java.net.HttpURLConnection.HTTP_OK;
 import static org.junit.jupiter.api.Assertions.*;
 
-@Log4j2
 @SpringBootTest
-class ResourceTests {
+class ResourceTests extends RootUtils {
     @Autowired
     private ResourceManager resourceManager;
 
@@ -26,7 +26,7 @@ class ResourceTests {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        log.info(resourceManager.dtoToJson(listResourceDTO));
+        logBody(listResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -44,7 +44,7 @@ class ResourceTests {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        log.info(resourceManager.dtoToJson(listResourceDTO));
+        logBody(listResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -61,7 +61,7 @@ class ResourceTests {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        log.info(resourceManager.dtoToJson(singleResourceDTO));
+        logBody(singleResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -81,7 +81,7 @@ class ResourceTests {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        log.info(resourceManager.dtoToJson(singleResourceDTO));
+        logBody(singleResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_NOT_FOUND, resp.code()),
