@@ -7,7 +7,6 @@ import lombok.extern.log4j.Log4j2;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 import ru.retrofit.dto.responses.ErrorResp;
 
 import java.io.File;
@@ -15,17 +14,7 @@ import java.io.IOException;
 
 @Log4j2
 public abstract class RootManager {
-//    private static final String BASE_URL = "https:/reqres.in/api/";
-//    protected Retrofit retrofit;
-
     private final ObjectMapper mapper = new ObjectMapper();
-
-//    public RootManager() {
-//        retrofit = new Retrofit.Builder()
-//                .baseUrl(BASE_URL)
-//                .addConverterFactory(JacksonConverterFactory.create())
-//                .build();
-//    }
 
     protected <T> T getService(Retrofit retrofit, Class<T> clazz) {
         return retrofit.create(clazz);
