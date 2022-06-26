@@ -3,6 +3,7 @@ package ru.retrofit.helpers;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import ru.retrofit.chucknorris.io.services.JokesService;
 import ru.retrofit.reqres.in.services.AuthorizationService;
 import ru.retrofit.reqres.in.services.ResourceService;
 import ru.retrofit.reqres.in.services.UserService;
@@ -11,6 +12,11 @@ import ru.retrofit.reqres.in.services.UserService;
 @ComponentScan("ru.retrofit")
 public class SpringConfig {
     //TODO сделать что-нибудь с методом getService()
+
+    @Bean
+    public JokesService jokesService() {
+        return RetrofitFactory.chuckNorrisSite().create(JokesService.class);
+    }
 
     @Bean
     public UserService userService() {
