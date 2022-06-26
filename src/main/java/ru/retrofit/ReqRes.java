@@ -9,9 +9,6 @@ public class ReqRes {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ReqRes.class, args);
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				SpringConfig.class
-		);
 	}
 
 }
