@@ -1,6 +1,5 @@
 package ru.retrofit.services;
 
-import org.springframework.stereotype.Component;
 import retrofit2.Call;
 import retrofit2.http.*;
 import ru.retrofit.dto.requests.CreateUserReq;
@@ -9,7 +8,6 @@ import ru.retrofit.dto.responses.ListUsersResp;
 import ru.retrofit.dto.responses.SingleUserResp;
 import ru.retrofit.dto.responses.UpdateUserResp;
 
-@Component
 public interface UserService {
     @GET("users")
     Call<ListUsersResp> getUserList(@Query("page") int pageNum);

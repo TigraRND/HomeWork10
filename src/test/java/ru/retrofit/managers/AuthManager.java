@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import retrofit2.Response;
 import ru.retrofit.dto.requests.LoginPasswordReq;
+import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.services.AuthorizationService;
 
 @Component
-public class AuthManager extends RootManager {
+public class AuthManager extends RootUtils {
 
     @Autowired
     private AuthorizationService authorizationService;

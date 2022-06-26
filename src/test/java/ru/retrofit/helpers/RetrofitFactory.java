@@ -21,4 +21,9 @@ public class RetrofitFactory {
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
     }
+
+    //Оставлен для примера
+    protected <T> T getService(Retrofit retrofit, Class<T> clazz) {
+        return retrofit.create(clazz);
+    }
 }
