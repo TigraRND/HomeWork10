@@ -33,8 +33,8 @@ public class RegisterTests extends RootUtils {
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
         AuthSuccessResp registerSuccessDTO = getBody(response, AuthSuccessResp.class);
 
-        logBody(reqBody);
-        logBody(registerSuccessDTO);
+        log(reqBody);
+        log(registerSuccessDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, response.code()),
@@ -53,8 +53,8 @@ public class RegisterTests extends RootUtils {
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -71,8 +71,8 @@ public class RegisterTests extends RootUtils {
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -89,8 +89,8 @@ public class RegisterTests extends RootUtils {
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -106,8 +106,8 @@ public class RegisterTests extends RootUtils {
         Response<ResponseBody> response = authManager.userRegistration(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),

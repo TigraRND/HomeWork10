@@ -33,8 +33,8 @@ public class AuthorizationTests extends RootUtils {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         AuthSuccessResp authSuccessDTO = getBody(response, AuthSuccessResp.class);
 
-        logBody(reqBody);
-        logBody(authSuccessDTO);
+        log(reqBody);
+        log(authSuccessDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, response.code()),
@@ -52,8 +52,8 @@ public class AuthorizationTests extends RootUtils {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -70,8 +70,8 @@ public class AuthorizationTests extends RootUtils {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -88,8 +88,8 @@ public class AuthorizationTests extends RootUtils {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),
@@ -105,8 +105,8 @@ public class AuthorizationTests extends RootUtils {
         Response<ResponseBody> response = authManager.userAuthorization(reqBody);
         ErrorResp errorDTO = getBody(response, ErrorResp.class);
 
-        logBody(reqBody);
-        logBody(errorDTO);
+        log(reqBody);
+        log(errorDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_BAD_REQUEST, response.code()),

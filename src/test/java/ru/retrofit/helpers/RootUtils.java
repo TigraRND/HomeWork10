@@ -10,6 +10,8 @@ import ru.retrofit.reqres.in.dto.responses.ErrorResp;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 @Log4j2
 public abstract class RootUtils {
@@ -33,7 +35,7 @@ public abstract class RootUtils {
         }
     }
 
-    public void logBody(Object obj, String message) {
+    public void log(Object obj, String message) {
         String parametrizedMessage = message + ":\n{}";
         try {
             log.info(parametrizedMessage, mapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj));
@@ -42,7 +44,12 @@ public abstract class RootUtils {
         }
     }
 
-    public void logBody(Object obj) {
-        logBody(obj, "Тело сообщения");
+    public void log(Object obj) {
+        log(obj, "Тело сообщения");
+    }
+
+    public <T> T randomItemFromList(List<T> list) {
+        int randomNum = new Random().nextInt(list.size());
+        return list.get(randomNum);
     }
 }

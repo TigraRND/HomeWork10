@@ -32,10 +32,10 @@ class SupportTests extends RootUtils {
         ListResourceResp listResourceDTO = resourceManager.getResourceList(pageNum).body();
         SingleResourceResp singleResourceResp = resourceManager.getResource(objectId).body();
 
-        logBody(listUsersDTO.getSupport(), "Список пользователей");
-        logBody(singleUserDTO.getSupport(), "Сингл пользователь");
-        logBody(listResourceDTO.getSupport(), "Список ресурсов");
-        logBody(singleResourceResp.getSupport(), "Сингл ресурс");
+        log(listUsersDTO.getSupport(), "Список пользователей");
+        log(singleUserDTO.getSupport(), "Сингл пользователь");
+        log(listResourceDTO.getSupport(), "Список ресурсов");
+        log(singleResourceResp.getSupport(), "Сингл ресурс");
 
         assertAll(
                 () -> assertEquals(expectedDTO, listUsersDTO.getSupport()),

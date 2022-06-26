@@ -26,7 +26,7 @@ class ResourceTests extends RootUtils {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        logBody(listResourceDTO);
+        log(listResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -44,7 +44,7 @@ class ResourceTests extends RootUtils {
         Response<ListResourceResp> resp = resourceManager.getResourceList(pageNum);
         ListResourceResp listResourceDTO = resp.body();
 
-        logBody(listResourceDTO);
+        log(listResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -61,7 +61,7 @@ class ResourceTests extends RootUtils {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        logBody(singleResourceDTO);
+        log(singleResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -81,7 +81,7 @@ class ResourceTests extends RootUtils {
         Response<SingleResourceResp> resp = resourceManager.getResource(resourceId);
         SingleResourceResp singleResourceDTO = resp.body();
 
-        logBody(singleResourceDTO);
+        log(singleResourceDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_NOT_FOUND, resp.code()),

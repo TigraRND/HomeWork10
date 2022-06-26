@@ -35,7 +35,7 @@ class UserTests extends RootUtils {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        logBody(listUsersDTO);
+        log(listUsersDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -53,7 +53,7 @@ class UserTests extends RootUtils {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum);
         ListUsersResp listUsersDTO = resp.body();
 
-        logBody(listUsersDTO);
+        log(listUsersDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -71,7 +71,7 @@ class UserTests extends RootUtils {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        logBody(singleUserDTO);
+        log(singleUserDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -91,7 +91,7 @@ class UserTests extends RootUtils {
         Response<SingleUserResp> resp = userManager.getUser(userId);
         SingleUserResp singleUserDTO = resp.body();
 
-        logBody(singleUserDTO);
+        log(singleUserDTO);
 
         assertAll(
                 () -> assertEquals(HTTP_NOT_FOUND, resp.code()),
@@ -105,8 +105,8 @@ class UserTests extends RootUtils {
         Response<CreateUserResp> resp = userManager.createUser(TEST_USER);
         CreateUserResp createUserRespDTO = resp.body();
 
-        logBody(TEST_USER, "Создаем пользователя");
-        logBody(createUserRespDTO, "Создан пользователь");
+        log(TEST_USER, "Создаем пользователя");
+        log(createUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_CREATED, resp.code()),
@@ -125,8 +125,8 @@ class UserTests extends RootUtils {
         Response<UpdateUserResp> resp = userManager.updateUserPut(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        logBody(TEST_USER, "Создаем пользователя");
-        logBody(updateUserRespDTO, "Создан пользователь");
+        log(TEST_USER, "Создаем пользователя");
+        log(updateUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -144,8 +144,8 @@ class UserTests extends RootUtils {
         Response<UpdateUserResp> resp = userManager.updateUserPatch(3, TEST_USER);
         UpdateUserResp updateUserRespDTO = resp.body();
 
-        logBody(TEST_USER, "Создаем пользователя");
-        logBody(updateUserRespDTO, "Создан пользователь");
+        log(TEST_USER, "Создаем пользователя");
+        log(updateUserRespDTO, "Создан пользователь");
 
         assertAll(
                 () -> assertEquals(HTTP_OK, resp.code()),
@@ -173,7 +173,7 @@ class UserTests extends RootUtils {
         Response<ListUsersResp> resp = userManager.getUserList(pageNum, delay);
         ListUsersResp listUsersDTO = resp.body();
 
-        logBody(listUsersDTO);
+        log(listUsersDTO);
 
         assertAll(
                 () -> assertTrue(resp.isSuccessful()),

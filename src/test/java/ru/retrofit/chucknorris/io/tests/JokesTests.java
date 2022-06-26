@@ -27,7 +27,7 @@ class JokesTests extends RootUtils {
 		Response<SingleJokeResp> resp = jokesManager.getRandomJoke();
 		SingleJokeResp actualDTO = resp.body();
 
-		logBody(actualDTO);
+		log(actualDTO);
 
 		assertAll(
 				() -> assertEquals(HTTP_OK, resp.code(), "response code not OK"),
@@ -48,7 +48,7 @@ class JokesTests extends RootUtils {
 		Response<ResponseBody> resp = jokesManager.searchByKeyword(keyword);
 		SearchResultResp actualDTO = getBody(resp, SearchResultResp.class);
 
-		logBody(actualDTO);
+		log(actualDTO);
 
 		assertAll(
 				() -> assertEquals(HTTP_OK, resp.code()),
@@ -64,7 +64,7 @@ class JokesTests extends RootUtils {
 		Response<List<String>> resp = jokesManager.getCategories();
 		List<String> categories = resp.body();
 
-		logBody(categories, "Список категорий");
+		log(categories, "Список категорий");
 
 		assertAll(
 				() -> assertEquals(HTTP_OK, resp.code()),
@@ -80,7 +80,7 @@ class JokesTests extends RootUtils {
 		Response<ResponseBody> resp = jokesManager.getRandomJokeByCategory(category);
 		SingleJokeResp actualDTO = getBody(resp, SingleJokeResp.class);
 
-		logBody(actualDTO);
+		log(actualDTO);
 
 		assertAll(
 				() -> assertEquals(HTTP_OK, resp.code()),
@@ -89,8 +89,19 @@ class JokesTests extends RootUtils {
 	}
 
 	@Test
-	@DisplayName("Тест на поиск по рандомной категории")
+	@DisplayName("Тест на поиск по случайной категории")
 	void checkSearchByRandomCategory() {
+		Response<List<String>> categoriesResp = jokesManager.getCategories();
+		List<String> categories = categoriesResp.body();
+		String randomCategory = randomItemFromList(categories);
 
+		log(randomCategory, "Выбрана категория");
+
+		Response<ResponseBody> resp = jokesManager.getRandomJokeByCategory(randomCategory);
+		SingleJokeResp actualDTO = getBody(resp, SingleJokeResp.class);
+
+		log(actualDTO);
+
+		assertEquals(randomCategory, actualDTO.getCategories().get(0));
 	}
 }
