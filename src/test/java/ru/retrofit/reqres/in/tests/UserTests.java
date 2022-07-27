@@ -13,6 +13,9 @@ import ru.retrofit.reqres.in.dto.responses.UpdateUserResp;
 import ru.retrofit.helpers.RootUtils;
 import ru.retrofit.reqres.in.managers.UserManager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static java.net.HttpURLConnection.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -168,9 +171,11 @@ class UserTests extends RootUtils {
     @Test
     @DisplayName("GET LIST USERS - delayed")
     void checkDelayedResponse() {
-        int pageNum = 2;
-        int delay = 3;
-        Response<ListUsersResp> resp = userManager.getUserList(pageNum, delay);
+        Map<String, Integer> queryMap = new HashMap<>();
+        queryMap.put("page", 2);
+        queryMap.put("delay", 3);
+
+        Response<ListUsersResp> resp = userManager.getUserList(queryMap);
         ListUsersResp listUsersDTO = resp.body();
 
         log(listUsersDTO);
@@ -178,7 +183,7 @@ class UserTests extends RootUtils {
         assertAll(
                 () -> assertTrue(resp.isSuccessful()),
                 () -> assertEquals(HTTP_OK, resp.code()),
-                () -> assertEquals(pageNum, listUsersDTO.getPage()),
+                () -> assertEquals(queryMap.get("page"), listUsersDTO.getPage()),
                 () -> assertEquals(listUsersDTO.getPerPage(), listUsersDTO.getData().size()),
                 () -> assertNotNull(listUsersDTO.getData().get(0)),
                 () -> assertNotNull(listUsersDTO.getSupport())

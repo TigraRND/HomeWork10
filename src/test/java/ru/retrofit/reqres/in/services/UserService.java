@@ -8,13 +8,14 @@ import ru.retrofit.reqres.in.dto.responses.ListUsersResp;
 import ru.retrofit.reqres.in.dto.responses.SingleUserResp;
 import ru.retrofit.reqres.in.dto.responses.UpdateUserResp;
 
+import java.util.Map;
+
 public interface UserService {
     @GET("users")
     Call<ListUsersResp> getUserList(@Query("page") int pageNum);
 
     @GET("users")
-    Call<ListUsersResp> getUserList(@Query("page") int pageNum,
-                                    @Query("delay") int delay);
+    Call<ListUsersResp> getUserList(@QueryMap Map<String, Integer> queryMap);
 
     @GET("users/{id}")
     Call<SingleUserResp> getUser(@Path("id") int id);

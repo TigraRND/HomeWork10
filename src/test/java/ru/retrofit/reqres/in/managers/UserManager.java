@@ -11,6 +11,8 @@ import ru.retrofit.reqres.in.dto.responses.SingleUserResp;
 import ru.retrofit.reqres.in.dto.responses.UpdateUserResp;
 import ru.retrofit.reqres.in.services.UserService;
 
+import java.util.Map;
+
 @Component
 public class UserManager {
     @Autowired
@@ -24,9 +26,9 @@ public class UserManager {
     }
 
     @SneakyThrows
-    public Response<ListUsersResp> getUserList(int pageNum, int delay) {
+    public Response<ListUsersResp> getUserList(Map<String, Integer> queryMap) {
         return userService
-                .getUserList(pageNum, delay)
+                .getUserList(queryMap)
                 .execute();
     }
 
